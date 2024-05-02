@@ -53,7 +53,7 @@ namespace ENTITY
             Console.SetCursorPosition(10, 22); Console.Write("Valor Total Contrato: ");
             Console.SetCursorPosition(50, 22); Console.Write(productoOro.calcularValorProductoOro(productoOro.precioPorGramoOro, productoOro.pesoProductoOro));
             Console.SetCursorPosition(10, 23); Console.Write("Observaciones");
-            Console.SetCursorPosition(13, 24); contratoCompra.descripcionContratoCompra = Console.ReadLine();
+            Console.SetCursorPosition(13, 24); contratoCompra.descripcionContrato = Console.ReadLine();
         
             return contratoCompra;
             

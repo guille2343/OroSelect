@@ -25,7 +25,7 @@ namespace ENTITY
             Persona persona = new Persona();
             string codigo, salario;
 
-            Console.SetCursorPosition(20, 5); Console.WriteLine("Registrar Nuevo Empleado");
+            Console.SetCursorPosition(20, 5); Console.Write("Registrar Nuevo Empleado");
             persona = persona.crearNuevaPersona();
             empleado.id = persona.id;
             empleado.nombre = persona.nombre;
@@ -35,9 +35,9 @@ namespace ENTITY
 
             while (true)
             {
-                Console.SetCursorPosition(10, 17); Console.WriteLine("                                                     ");
-
-                Console.SetCursorPosition(10, 12); Console.WriteLine("Digite El Codigo de Empleado: ");
+                Console.SetCursorPosition(10, 17); Console.Write("                                                     ");
+                
+                Console.SetCursorPosition(10, 12); Console.Write("Digite El Codigo de Empleado: ");
                 Console.SetCursorPosition(50, 12); codigo = Console.ReadLine();
                 if (!String.IsNullOrEmpty(codigo))
                 {
@@ -46,17 +46,17 @@ namespace ENTITY
                 }
                 else
                 {
-                    Console.SetCursorPosition(10, 17); Console.WriteLine("Error: No Se Admiten Campos Vacios");
+                    Console.SetCursorPosition(10, 17); Console.Write("Error: No Se Admiten Campos Vacios");
                     Console.ReadKey();
                 }
             }
 
             while (true)
             {
-                Console.SetCursorPosition(10, 17); Console.WriteLine("                                                      ");
-                Console.SetCursorPosition(50, 13); Console.WriteLine("                                        ");
+                Console.SetCursorPosition(10, 17); Console.Write("                                                      ");
+                Console.SetCursorPosition(50, 13); Console.Write("                                        ");
 
-                Console.SetCursorPosition(10, 13); Console.WriteLine("Digite El Salario: ");
+                Console.SetCursorPosition(10, 13); Console.Write("Digite El Salario: ");
                 Console.SetCursorPosition(50, 13); salario = Console.ReadLine();
                 validarDecimal(salario);
 
@@ -67,7 +67,7 @@ namespace ENTITY
                 }
                 else
                 {
-                    Console.SetCursorPosition(10, 17); Console.WriteLine("Error: Solo Se Admiten Valores Numericos 0-9");
+                    Console.SetCursorPosition(10, 17); Console.Write("Error: Solo Se Admiten Valores Numericos 0-9");
                     Console.ReadKey();
                 }
             }

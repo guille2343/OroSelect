@@ -130,9 +130,6 @@ namespace ENTITY
         }
 
 
-        } 
-
-
         public bool validarStringAceptarSoloLetras(string dato)
         {
             string patron = "^[a-zA-Z]+$";

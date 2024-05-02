@@ -13,9 +13,9 @@ namespace OroSelect
     {
         static void Main(string[] args)
         {
-           ProductoOro productoOro = new ProductoOro();
-            productoOro.crearNuevoProductoOro();
-            productoOro.ToString();
+            Persona persona = new Persona();
+            persona.crearNuevaPersona();
+            persona.ToString();
             Console.ReadKey();
         }
     }

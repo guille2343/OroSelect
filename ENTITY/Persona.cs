@@ -65,7 +65,7 @@ namespace ENTITY
                 }
             }
             return null;
-        }
+        } 
 
         public bool validarStringAceptarSoloLetras(string dato)
         {

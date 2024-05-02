@@ -53,7 +53,7 @@ namespace ENTITY
 
             while (true)
             {
-                Console.SetCursorPosition(10, 17); Console.WriteLine("                                                     ");
+                Console.SetCursorPosition(10, 17); Console.WriteLine("                                                      ");
                 Console.SetCursorPosition(50, 13); Console.WriteLine("                                        ");
 
                 Console.SetCursorPosition(10, 13); Console.WriteLine("Digite El Salario: ");

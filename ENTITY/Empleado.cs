@@ -8,15 +8,15 @@ namespace ENTITY
 {
     public class Empleado : Persona
     {
-        public String CodigoEmpleado {  get; set; }
-        public decimal Salario { get; set; }
+        public String codigoEmpleado {  get; set; }
+        public decimal salario { get; set; }
 
         public Empleado() { }
 
         public Empleado(string codigoEmpleado, decimal salario)
         {
-            CodigoEmpleado = codigoEmpleado;
-            Salario = salario;
+            this.codigoEmpleado = codigoEmpleado;
+            this.salario = salario;
         }
 
         public Empleado crearNuevoEmpleado()
@@ -26,6 +26,10 @@ namespace ENTITY
             string codigo, salario;
 
             Console.SetCursorPosition(20, 5); Console.Write("Registrar Nuevo Empleado");
+
+            Console.SetCursorPosition(10, 7); Console.Write("Codigo Empleado:  ");
+            empleado.codigoEmpleado = generarCodigoAleatoriamente();
+            Console.SetCursorPosition(50, 7); Console.Write(empleado.codigoEmpleado);
             persona = persona.crearNuevaPersona();
             empleado.id = persona.id;
             empleado.nombre = persona.nombre;
@@ -33,24 +37,7 @@ namespace ENTITY
             empleado.telefono = persona.telefono;
             empleado.direccion = persona.direccion;
 
-            while (true)
-            {
-                Console.SetCursorPosition(10, 17); Console.Write("                                                     ");
-                
-                Console.SetCursorPosition(10, 12); Console.Write("Digite El Codigo de Empleado: ");
-                Console.SetCursorPosition(50, 12); codigo = Console.ReadLine();
-                if (!String.IsNullOrEmpty(codigo))
-                {
-                    empleado.CodigoEmpleado = codigo;
-                    break;
-                }
-                else
-                {
-                    Console.SetCursorPosition(10, 17); Console.Write("Error: No Se Admiten Campos Vacios");
-                    Console.ReadKey();
-                }
-            }
-
+          
             while (true)
             {
                 Console.SetCursorPosition(10, 17); Console.Write("                                                      ");
@@ -62,7 +49,7 @@ namespace ENTITY
 
                 if (!String.IsNullOrEmpty(salario) && validarDecimal(salario))
                 {
-                    empleado.Salario = decimal.Parse(salario);
+                    empleado.salario = decimal.Parse(salario);
                     break;
                 }
                 else
@@ -96,6 +83,6 @@ namespace ENTITY
                 return false;
             }
             return true;
-        }
+        } 
     }
 }

@@ -35,8 +35,8 @@ namespace ENTITY
             {
                 Console.SetCursorPosition(10, 17); Console.Write("                                                     ");
                
-                Console.SetCursorPosition(10, 7); Console.Write("Digite El Numero De Identificacion: ");
-                Console.SetCursorPosition(50, 7); id = Console.ReadLine();
+                Console.SetCursorPosition(10, 8); Console.Write("Digite El Numero De Identificacion: ");
+                Console.SetCursorPosition(50, 8); id = Console.ReadLine();
                 if (!String.IsNullOrEmpty(id))
                 {
                     persona.id = id;
@@ -52,10 +52,10 @@ namespace ENTITY
             while (true)
             {
                 Console.SetCursorPosition(10, 17); Console.Write("                                                     ");
-                Console.SetCursorPosition(50, 8); Console.Write("                                                              ");
+                Console.SetCursorPosition(50, 9); Console.Write("                                                              ");
 
-                Console.SetCursorPosition(10, 8); Console.Write("Digite El Nombre(s): ");
-                Console.SetCursorPosition(50, 8); nombre = Console.ReadLine();
+                Console.SetCursorPosition(10, 9); Console.Write("Digite El Nombre(s): ");
+                Console.SetCursorPosition(50, 9); nombre = Console.ReadLine();
                 if (!String.IsNullOrEmpty(nombre) && validarStringAceptarSoloLetras(nombre))
                 {
                     persona.nombre = nombre;
@@ -71,10 +71,10 @@ namespace ENTITY
             while (true)
             {
                 Console.SetCursorPosition(10, 17); Console.Write("                                                     ");
-                Console.SetCursorPosition(50, 9); Console.Write("                                                              ");
+                Console.SetCursorPosition(50, 10); Console.Write("                                                              ");
 
-                Console.SetCursorPosition(10, 9); Console.Write("Digite Los Apellidos: ");
-                Console.SetCursorPosition(50, 9); apellido = Console.ReadLine();
+                Console.SetCursorPosition(10, 10); Console.Write("Digite Los Apellidos: ");
+                Console.SetCursorPosition(50, 10); apellido = Console.ReadLine();
                 if (!String.IsNullOrEmpty(apellido) && validarStringAceptarSoloLetras(apellido))
                 {
                     persona.apellido = apellido;
@@ -90,10 +90,10 @@ namespace ENTITY
             while (true)
             {
                 Console.SetCursorPosition(10, 17); Console.Write("                                                     ");
-                Console.SetCursorPosition(50, 10); Console.Write("                                   ");
+                Console.SetCursorPosition(50, 11); Console.Write("                                   ");
 
-                Console.SetCursorPosition(10, 10); Console.Write("Digite El Telefono: ");
-                Console.SetCursorPosition(50, 10); telefono = Console.ReadLine();
+                Console.SetCursorPosition(10, 11); Console.Write("Digite El Telefono: ");
+                Console.SetCursorPosition(50, 11); telefono = Console.ReadLine();
                 validarEntero(telefono);
 
                 if (!String.IsNullOrEmpty(telefono) && validarEntero(telefono))
@@ -112,8 +112,8 @@ namespace ENTITY
             {
                 Console.SetCursorPosition(10, 17); Console.Write("                                                     ");
                 
-                Console.SetCursorPosition(10, 11); Console.Write("Digite La Direccion: ");
-                Console.SetCursorPosition(50, 11); direccion = Console.ReadLine();
+                Console.SetCursorPosition(10, 12); Console.Write("Digite La Direccion: ");
+                Console.SetCursorPosition(50, 12); direccion = Console.ReadLine();
                 if (!String.IsNullOrEmpty(direccion))
                 {
                     persona.direccion = direccion;
@@ -158,6 +158,22 @@ namespace ENTITY
                 return false;
             }
             return true;
+        }
+
+        public String generarCodigoAleatoriamente()
+        {
+            String codigo;
+            int longitudCodigo = 7;
+            const string caracteresDelCodigo = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            StringBuilder token = new StringBuilder();
+            Random caracterRandom = new Random();
+            for (int i = 0; i < longitudCodigo; i++)
+            {
+                int ubicacionDelCaracter = caracterRandom.Next(caracteresDelCodigo.Length);
+                token.Append(caracteresDelCodigo[ubicacionDelCaracter]);
+            }
+            codigo = token.ToString();
+            return codigo;
         }
 
     }

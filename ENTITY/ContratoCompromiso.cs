@@ -73,5 +73,18 @@ namespace ENTITY
              return contratoCompromiso;
         
          }
+
+          public void recibirAbonoDeSaldo(decimal abono)
+         {
+            if(abono <= 0 || abono > saldoContratoCompromiso)
+            {
+                Console.WriteLine("Error: Vrifique El Valor E Intente Nuevamente");
+            }
+            else
+            {
+                saldoContratoCompromiso -= abono;
+            }
+            
+         }
     }
 }

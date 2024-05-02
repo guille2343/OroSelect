@@ -33,9 +33,9 @@ namespace ENTITY
 
             while (true)
             {
-                Console.SetCursorPosition(10, 17); Console.WriteLine("                                                     ");
-
-                Console.SetCursorPosition(10, 7); Console.WriteLine("Digite El Numero De Identificacion: ");
+                Console.SetCursorPosition(10, 17); Console.Write("                                                     ");
+               
+                Console.SetCursorPosition(10, 7); Console.Write("Digite El Numero De Identificacion: ");
                 Console.SetCursorPosition(50, 7); id = Console.ReadLine();
                 if (!String.IsNullOrEmpty(id))
                 {
@@ -44,17 +44,17 @@ namespace ENTITY
                 }
                 else
                 {
-                    Console.SetCursorPosition(10, 17); Console.WriteLine("Error: No Se Admiten Campos Vacios");
+                    Console.SetCursorPosition(10, 17); Console.Write("Error: No Se Admiten Campos Vacios");
                     Console.ReadKey();
                 }
             }
 
             while (true)
             {
-                Console.SetCursorPosition(10, 17); Console.WriteLine("                                                     ");
-                Console.SetCursorPosition(50, 8); Console.WriteLine("                                                              ");
+                Console.SetCursorPosition(10, 17); Console.Write("                                                     ");
+                Console.SetCursorPosition(50, 8); Console.Write("                                                              ");
 
-                Console.SetCursorPosition(10, 8); Console.WriteLine("Digite El Nombre(s): ");
+                Console.SetCursorPosition(10, 8); Console.Write("Digite El Nombre(s): ");
                 Console.SetCursorPosition(50, 8); nombre = Console.ReadLine();
                 if (!String.IsNullOrEmpty(nombre) && validarStringAceptarSoloLetras(nombre))
                 {
@@ -63,17 +63,17 @@ namespace ENTITY
                 }
                 else
                 {
-                    Console.SetCursorPosition(10, 17); Console.WriteLine("Error: Solo Se Admiten Caracteres Alfabeticos");
+                    Console.SetCursorPosition(10, 17); Console.Write("Error: Solo Se Admiten Caracteres Alfabeticos");
                     Console.ReadKey();
                 }
             }
 
             while (true)
             {
-                Console.SetCursorPosition(10, 17); Console.WriteLine("                                                     ");
-                Console.SetCursorPosition(50, 9); Console.WriteLine("                                                              ");
+                Console.SetCursorPosition(10, 17); Console.Write("                                                     ");
+                Console.SetCursorPosition(50, 9); Console.Write("                                                              ");
 
-                Console.SetCursorPosition(10, 9); Console.WriteLine("Digite Los Apellidos: ");
+                Console.SetCursorPosition(10, 9); Console.Write("Digite Los Apellidos: ");
                 Console.SetCursorPosition(50, 9); apellido = Console.ReadLine();
                 if (!String.IsNullOrEmpty(apellido) && validarStringAceptarSoloLetras(apellido))
                 {
@@ -82,17 +82,17 @@ namespace ENTITY
                 }
                 else
                 {
-                    Console.SetCursorPosition(10, 17); Console.WriteLine("Error: Solo Se Admiten Caracteres Alfabeticos");
+                    Console.SetCursorPosition(10, 17); Console.Write("Error: Solo Se Admiten Caracteres Alfabeticos");
                     Console.ReadKey();
                 }
             }
 
             while (true)
             {
-                Console.SetCursorPosition(10, 17); Console.WriteLine("                                                     ");
-                Console.SetCursorPosition(50, 10); Console.WriteLine("                                   ");
+                Console.SetCursorPosition(10, 17); Console.Write("                                                     ");
+                Console.SetCursorPosition(50, 10); Console.Write("                                   ");
 
-                Console.SetCursorPosition(10, 10); Console.WriteLine("Digite El Telefono: ");
+                Console.SetCursorPosition(10, 10); Console.Write("Digite El Telefono: ");
                 Console.SetCursorPosition(50, 10); telefono = Console.ReadLine();
                 validarEntero(telefono);
 
@@ -103,16 +103,16 @@ namespace ENTITY
                 }
                 else
                 {
-                    Console.SetCursorPosition(10, 17); Console.WriteLine("Error: Solo Se Admiten Valores Numericos 0-9");
+                    Console.SetCursorPosition(10, 17); Console.Write("Error: Solo Se Admiten Valores Numericos 0-9");
                     Console.ReadKey();
                 }
             }
 
             while (true)
             {
-                Console.SetCursorPosition(10, 17); Console.WriteLine("                                                     ");
-
-                Console.SetCursorPosition(10, 11); Console.WriteLine("Digite La Direccion: ");
+                Console.SetCursorPosition(10, 17); Console.Write("                                                     ");
+                
+                Console.SetCursorPosition(10, 11); Console.Write("Digite La Direccion: ");
                 Console.SetCursorPosition(50, 11); direccion = Console.ReadLine();
                 if (!String.IsNullOrEmpty(direccion))
                 {
@@ -121,7 +121,7 @@ namespace ENTITY
                 }
                 else
                 {
-                    Console.SetCursorPosition(10, 17); Console.WriteLine("Error: No Se Admiten Campos Vacios");
+                    Console.SetCursorPosition(10, 17); Console.Write("Error: No Se Admiten Campos Vacios");
                     Console.ReadKey();
                 }
             }

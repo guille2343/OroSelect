@@ -30,14 +30,14 @@ namespace ENTITY
             ProductoOro productoOro = new ProductoOro();
             string pesoProducto, valorPorGramoProducto, purezaProducto;
 
-            Console.SetCursorPosition(15, 5); Console.WriteLine("Ingrese los datos relacionados con el producto:");
+            Console.SetCursorPosition(15, 5); Console.Write("Ingrese los datos relacionados con el producto:");
 
             while (true)
             {
-                Console.SetCursorPosition(50, 7); Console.WriteLine("                              ");
-                Console.SetCursorPosition(10, 15); Console.WriteLine("                                                                                                                              ");
+                Console.SetCursorPosition(50, 7); Console.Write("                              ");
+                Console.SetCursorPosition(10, 15); Console.Write("                                                                                                                              ");
 
-                Console.SetCursorPosition(10, 7); Console.WriteLine("Peso Del Producto:");
+                Console.SetCursorPosition(10, 7); Console.Write("Peso Del Producto:");
                 Console.SetCursorPosition(50, 7); pesoProducto = Console.ReadLine();
                 validarDecimal(pesoProducto);
                 if (validarDecimal(pesoProducto))
@@ -47,7 +47,7 @@ namespace ENTITY
                 }
                 else
                 {
-                    Console.SetCursorPosition(10, 15); Console.WriteLine("Error: el valor introducido debe ser mayor que cero y contener los siguientes caracteres (0-9, puntos y comas)");
+                    Console.SetCursorPosition(10, 15); Console.Write("Error: el valor introducido debe ser mayor que cero y contener los siguientes caracteres (0-9, puntos y comas)");
                     Console.ReadKey();
                 }
 
@@ -55,10 +55,10 @@ namespace ENTITY
 
             while (true)
             {
-                Console.SetCursorPosition(50, 8); Console.WriteLine("                              ");
-                Console.SetCursorPosition(10, 15); Console.WriteLine("                                                                                                                              ");
+                Console.SetCursorPosition(50, 8); Console.Write("                              ");
+                Console.SetCursorPosition(10, 15); Console.Write("                                                                                                                              ");
 
-                Console.SetCursorPosition(10, 8); Console.WriteLine("Precio Por Gramo:");
+                Console.SetCursorPosition(10, 8); Console.Write("Precio Por Gramo:");
                 Console.SetCursorPosition(50, 8); valorPorGramoProducto = Console.ReadLine();
                 validarDecimal(valorPorGramoProducto);
                 if (validarDecimal(valorPorGramoProducto))
@@ -68,17 +68,17 @@ namespace ENTITY
                 }
                 else
                 {
-                    Console.SetCursorPosition(10, 15); Console.WriteLine("Error: el valor introducido debe ser mayor que cero y contener los siguientes caracteres (0-9, puntos y comas)");
+                    Console.SetCursorPosition(10, 15); Console.Write("Error: el valor introducido debe ser mayor que cero y contener los siguientes caracteres (0-9, puntos y comas)");
                     Console.ReadKey();
                 }
             }
 
             while (true)
             {
-                Console.SetCursorPosition(50, 9); Console.WriteLine("                                      ");
-                Console.SetCursorPosition(10, 15); Console.WriteLine("                                                                                                                    ");
+                Console.SetCursorPosition(50, 9); Console.Write("                                      ");
+                Console.SetCursorPosition(10, 15); Console.Write("                                                                                                                    ");
 
-                Console.SetCursorPosition(10, 9); Console.WriteLine("Nivel De Pureza:");
+                Console.SetCursorPosition(10, 9); Console.Write("Nivel De Pureza:");
                 Console.SetCursorPosition(50, 9); purezaProducto = Console.ReadLine();
                 validarEntero(purezaProducto);
                 if (validarEntero(purezaProducto))
@@ -88,15 +88,15 @@ namespace ENTITY
                 }
                 else
                 {
-                    Console.SetCursorPosition(10, 15); Console.WriteLine("Error: Los Niveles De Pureza Permitidos Son: 10, 14, 18. Presine intro para continuar");
+                    Console.SetCursorPosition(10, 15); Console.Write("Error: Los Niveles De Pureza Permitidos Son: 10, 14, 18. Presine intro para continuar");
                     Console.ReadKey();
                 }
             }
 
-            Console.SetCursorPosition(10, 10); Console.WriteLine("Valor Total Producto: ");
+            Console.SetCursorPosition(10, 10); Console.Write("Valor Total Producto: ");
             Console.SetCursorPosition(50, 10); productoOro.validarEnteros = calcularValorProductoOro(productoOro.pesoProductoOro, productoOro.precioPorGramoOro);
-            Console.SetCursorPosition(50, 10); Console.WriteLine(productoOro.validarEnteros);
-            Console.SetCursorPosition(10, 11); Console.WriteLine("Decripcion Del Producto:");
+            Console.SetCursorPosition(50, 10); Console.Write(productoOro.validarEnteros);
+            Console.SetCursorPosition(10, 11); Console.Write("Decripcion Del Producto:");
             Console.SetCursorPosition(10, 12); productoOro.descripcionProducto = Console.ReadLine();
 
             return productoOro;

@@ -13,8 +13,8 @@ namespace OroSelect
     {
         static void Main(string[] args)
         {
-            Empleado empleado = new Empleado();
-            empleado.crearNuevoEmpleado();
+            Proveedor cliente = new Proveedor();
+            cliente.crearNuevoProveedor();
             Console.ReadKey();
         }
     }

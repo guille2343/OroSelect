@@ -126,9 +126,12 @@ namespace ENTITY
                 }
             }
 
-
             return persona; 
         }
+
+
+        } 
+
 
         public bool validarStringAceptarSoloLetras(string dato)
         {

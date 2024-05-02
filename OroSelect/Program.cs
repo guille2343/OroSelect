@@ -13,9 +13,8 @@ namespace OroSelect
     {
         static void Main(string[] args)
         {
-            Persona persona = new Persona();
-            persona.crearNuevaPersona();
-            persona.ToString();
+            Empleado empleado = new Empleado();
+            empleado.crearNuevoEmpleado();
             Console.ReadKey();
         }
     }

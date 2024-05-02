@@ -8,17 +8,17 @@ namespace ENTITY
 {
     public class Contrato
     {
-        public String CodigoContrato { get; set; }
-        public DateTime FechaEmisionContrato { get; set; }
-        public string EstadoContrato { get; set; }
+        public String codigoContrato { get; set; }
+        public DateTime fechaEmisionContrato { get; set; }
+        public string estadoContrato { get; set; }
 
         public Contrato() { }   
 
         public Contrato(String codigoContrato, String estadoContrato)
         {
-            CodigoContrato = codigoContrato;
-            EstadoContrato = estadoContrato;
-            FechaEmisionContrato = DateTime.Today;
+            this.codigoContrato = codigoContrato;
+            this.estadoContrato = estadoContrato;
+            fechaEmisionContrato = DateTime.Today;
         }
 
         public Contrato emitirNuevoContrato()

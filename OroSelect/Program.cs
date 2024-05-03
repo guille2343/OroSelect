@@ -1,4 +1,5 @@
-﻿using ENTITY;
+﻿using BLL;
+using ENTITY;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +14,8 @@ namespace OroSelect
     {
         static void Main(string[] args)
         {
-            Proveedor cliente = new Proveedor();
-            cliente.crearNuevoProveedor();
+            Menu menu = new Menu();
+            menu.menuPrincipal();
             Console.ReadKey();
         }
     }

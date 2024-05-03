@@ -9,6 +9,7 @@ namespace ENTITY
 {
     public class ProductoOro
     {
+        public string codigoProducto {  get; set; }
         public decimal validarEnteros { get; set; }
         public decimal pesoProductoOro { get; set; }
         public string descripcionProducto { get; set; }
@@ -17,8 +18,9 @@ namespace ENTITY
 
         public ProductoOro() { }
 
-        public ProductoOro(decimal valorProductoOro, decimal pesoProductoOro, string descripcionProductoO, int pureza)
+        public ProductoOro(string codigoProducto, decimal valorProductoOro, decimal pesoProductoOro, string descripcionProductoO, int pureza)
         {
+            this.codigoProducto = codigoProducto;
             this.validarEnteros = valorProductoOro;
             this.pesoProductoOro = pesoProductoOro;
             this.descripcionProducto = descripcionProductoO;
@@ -30,13 +32,16 @@ namespace ENTITY
             ProductoOro productoOro = new ProductoOro();
             string pesoProducto, valorPorGramoProducto, purezaProducto;
 
-            Console.SetCursorPosition(15, 5); Console.Write("Ingrese los datos relacionados con el producto:");
+            Console.SetCursorPosition(15, 4); Console.Write("Ingrese los datos relacionados con el producto:");
 
             while (true)
             {
                 Console.SetCursorPosition(50, 7); Console.Write("                              ");
                 Console.SetCursorPosition(10, 15); Console.Write("                                                                                                                              ");
 
+                Console.SetCursorPosition(10, 6);Console.Write("Codigo Producto");
+                codigoProducto = generarCodigoAleatoriamente();
+                Console.SetCursorPosition(50, 6);Console.Write(codigoProducto);
                 Console.SetCursorPosition(10, 7); Console.Write("Peso Del Producto:");
                 Console.SetCursorPosition(50, 7); pesoProducto = Console.ReadLine();
                 validarDecimal(pesoProducto);
@@ -157,6 +162,22 @@ namespace ENTITY
             decimal valorCalculadoProductoOro = pesoProductoOro * valorPorGramo;
 
             return valorCalculadoProductoOro;
+        }
+
+        public String generarCodigoAleatoriamente()
+        {
+            String codigo;
+            int longitudCodigo = 7;
+            const string caracteresDelCodigo = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            StringBuilder token = new StringBuilder();
+            Random caracterRandom = new Random();
+            for (int i = 0; i < longitudCodigo; i++)
+            {
+                int ubicacionDelCaracter = caracterRandom.Next(caracteresDelCodigo.Length);
+                token.Append(caracteresDelCodigo[ubicacionDelCaracter]);
+            }
+            codigo = token.ToString();
+            return codigo;
         }
     }
 }

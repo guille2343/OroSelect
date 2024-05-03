@@ -6,7 +6,30 @@ using System.Threading.Tasks;
 
 namespace BLL
 {
-    internal class GestionCliente
+    public class GestionCliente
     {
+        public void RegistrarClientes()
+        {
+
+        }
+
+        public void modificarDatosCliente() {
+        
+        }
+
+        public void mostrarListaClientes()
+        {
+
+        }
+
+        public void consultarUnCliente()
+        {
+
+        }
+
+        public void eliminarCliente()
+        {
+
+        }
     }
 }

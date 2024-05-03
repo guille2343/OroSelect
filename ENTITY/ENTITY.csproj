@@ -51,7 +51,7 @@
     <Compile Include="ContratoVenta.cs" />
     <Compile Include="Empleado.cs" />
     <Compile Include="Gerente.cs" />
-    <Compile Include="InventarioContrato.cs" />
+    <Compile Include="Inventario.cs" />
     <Compile Include="Persona.cs" />
     <Compile Include="ProductoOro.cs" />
     <Compile Include="Program.cs" />

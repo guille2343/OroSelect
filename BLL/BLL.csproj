@@ -45,6 +45,8 @@
   <ItemGroup>
     <Compile Include="GestionarPersonalEmpresa.cs" />
     <Compile Include="GestionCliente.cs" />
+    <Compile Include="GestionContrato.cs" />
+    <Compile Include="GestionInventario.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

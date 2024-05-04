@@ -229,7 +229,6 @@ namespace BLL
         public void RegistrarClientes()
         {
             Cliente cliente = new Cliente();
-            Inventario inventario = new Inventario();
             cliente = cliente.crearNuevoCliente();
             clienteAgregarALaLista(cliente);
             Console.ReadKey();
@@ -274,8 +273,7 @@ namespace BLL
 
         public void consultarUnCliente()
         {
-            Cliente cliente;
-            Inventario inventario = new Inventario();
+            Cliente cliente;   
             string codigo;
 
             if (listaClienteVacia())

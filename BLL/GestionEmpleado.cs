@@ -7,12 +7,10 @@ using System.Threading.Tasks;
 
 namespace BLL
 {
-    public class GestionInventario
+    public class GestionEmpleado
     {
-        public List<ProductoOro> productosOro = new List<ProductoOro>();
+        public List<Empleado> empleados = new List<Empleado>();
 
-        public GestionInventario() { }
+        public GestionEmpleado() { }
     }
-
-
 }

@@ -94,9 +94,9 @@ namespace ENTITY
 
                 Console.SetCursorPosition(10, 11); Console.Write("Digite El Telefono: ");
                 Console.SetCursorPosition(50, 11); telefono = Console.ReadLine();
-                validarEntero(telefono);
+                validarLong(telefono);
 
-                if (!String.IsNullOrEmpty(telefono) && validarEntero(telefono))
+                if (!String.IsNullOrEmpty(telefono) && validarLong(telefono))
                 {
                     persona.telefono = telefono;
                     break;
@@ -137,12 +137,12 @@ namespace ENTITY
             return Regex.IsMatch(dato, patron);
         }
 
-        public bool validarEntero(string dato)
+        public bool validarLong(string dato)
         {
-            int enteroProducto;
+            long enteroProducto;
             try
             {
-                enteroProducto = int.Parse(dato);
+                enteroProducto = long.Parse(dato);
                 if (enteroProducto <= 0)
                 {
                     return false;

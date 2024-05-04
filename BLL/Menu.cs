@@ -151,7 +151,7 @@ namespace BLL
 
         public void menuPersonalEmpresa()
         {
-            GestionarPersonalEmpresa gestionPersonal = new GestionarPersonalEmpresa();
+            GestionEmpleado gestionPersonal = new GestionEmpleado();
             int opcion;
             string opcionMenu;
             bool salir = false;
@@ -225,7 +225,7 @@ namespace BLL
 
         public void menuGestionarContratos()
         {
-            GestionContrato gestionContrato = new GestionContrato();
+            GestionContratoVenta gestionContrato = new GestionContratoVenta();
             int opcion;
             string opcionMenu;
             bool salir = false;
@@ -297,7 +297,7 @@ namespace BLL
 
         }
 
-        public void submenuListaContratos(GestionContrato gestionContrato)
+        public void submenuListaContratos(GestionContratoVenta gestionContrato)
         {
             int opcion;
             string opcionMenu;

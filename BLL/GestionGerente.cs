@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace BLL
 {
-    public class GestionInventario
+    public class GestionGerente
     {
-        public List<ProductoOro> productosOro = new List<ProductoOro>();
+        public List<Gerente> gerentes = new List<Gerente>();
 
-        public GestionInventario() { }
+        public GestionGerente() { }
+
+
     }
-
-
 }

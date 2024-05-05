@@ -17,6 +17,7 @@ namespace BLL
 
         }
 
+
         public bool listaClienteVacia()
         {
             if (clientes.Count != 0) { return false; }

@@ -9,7 +9,7 @@ namespace BLL
 {
     public class GestionGerente
     {
-         public List<Gerente> gerentes = new List<Gerente>();
+         public List<Empelado> gerentes = new List<Empelado>();
 
          public GestionGerente() { }
         
@@ -19,7 +19,7 @@ namespace BLL
              return true;
          }
         
-         public void gerenteAgregarALaLista(Gerente gerente)
+         public void gerenteAgregarALaLista(Empelado gerente)
          {
         
              bool gerenteExiste = false;
@@ -44,11 +44,11 @@ namespace BLL
         
          }
         
-         public Gerente gerenteBuscarEnLista(String codigo)
+         public Empelado gerenteBuscarEnLista(String codigo)
          {
              for (int i = 0; i < gerentes.Count; i++)
              {
-                 if (gerentes[i].codigoGerente.Equals(codigo))
+                 if (gerentes[i].codigoEmpleado.Equals(codigo))
                  {
                      return gerentes[i];
                  }
@@ -79,7 +79,7 @@ namespace BLL
         
          public void modificarDatosGerente()
          {
-             Gerente gerente;
+             Empelado gerente;
         
              if (listaGerenteVacia())
              {
@@ -134,14 +134,14 @@ namespace BLL
         
          }
         
-         public Gerente editarGerenteAuxiliar(Gerente gerente)
+         public Empelado editarGerenteAuxiliar(Empelado gerente)
          {
              string telefono, salario;
         
              Console.Clear();
              Console.SetCursorPosition(53, 5); Console.Write("Datos del Gerente");
              Console.SetCursorPosition(48, 7); Console.Write("Código: ");
-             Console.SetCursorPosition(70, 7); Console.Write(gerente.codigoGerente);
+             Console.SetCursorPosition(70, 7); Console.Write(gerente.codigoEmpleado);
              Console.SetCursorPosition(48, 8); Console.Write("No. Identificación: ");
              Console.SetCursorPosition(70, 8); Console.Write(gerente.id);
         
@@ -245,7 +245,7 @@ namespace BLL
         
          public void RegistrarGerente()
          {
-             Gerente gerente = new Gerente();
+             Empelado gerente = new Empelado();
              gerente = gerente.crearNuevoGerente();
              gerenteAgregarALaLista(gerente);
              Console.ReadKey();
@@ -275,7 +275,7 @@ namespace BLL
         
                  for (int i = 0; i < gerentes.Count; i++)
                  {
-                     Console.SetCursorPosition(10, posicionPantalla); Console.Write(gerentes[i].codigoGerente);
+                     Console.SetCursorPosition(10, posicionPantalla); Console.Write(gerentes[i].codigoEmpleado);
                      Console.SetCursorPosition(25, posicionPantalla); Console.Write(gerentes[i].id);
                      Console.SetCursorPosition(40, posicionPantalla); Console.Write(gerentes[i].apellido);
                      Console.SetCursorPosition(55, posicionPantalla); Console.Write(gerentes[i].nombre);
@@ -293,7 +293,7 @@ namespace BLL
         
          public void consultarUnGerente()
          {
-             Gerente gerente;
+             Empelado gerente;
         
              string codigo;
         
@@ -326,7 +326,7 @@ namespace BLL
                              Console.Clear();
                              Console.SetCursorPosition(53, 5); Console.Write("Datos del Gerente");
                              Console.SetCursorPosition(48, 7); Console.Write("Código: ");
-                             Console.SetCursorPosition(70, 7); Console.Write(gerente.codigoGerente);
+                             Console.SetCursorPosition(70, 7); Console.Write(gerente.codigoEmpleado);
                              Console.SetCursorPosition(48, 8); Console.Write("No. Identificación: ");
                              Console.SetCursorPosition(70, 8); Console.Write(gerente.id);
                              Console.SetCursorPosition(48, 9); Console.Write("Apellido: ");

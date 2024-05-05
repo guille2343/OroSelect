@@ -50,7 +50,7 @@
     <Compile Include="ContratoCompromiso.cs" />
     <Compile Include="ContratoVenta.cs" />
     <Compile Include="Empleado.cs" />
-    <Compile Include="Gerente.cs" />
+    <Compile Include="Empelado.cs" />
     <Compile Include="Persona.cs" />
     <Compile Include="ProductoOro.cs" />
     <Compile Include="Program.cs" />

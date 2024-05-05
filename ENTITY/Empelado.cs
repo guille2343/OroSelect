@@ -7,30 +7,30 @@ using System.Threading.Tasks;
 
 namespace ENTITY
 {
-    public class Gerente : Persona
+    public class Empelado : Persona
     {
-        public string codigoGerente { get; set; }
+        public string codigoEmpleado { get; set; }
         public decimal salario { get; set; }
 
-        public Gerente() { }
+        public Empelado() { }
 
-        public Gerente(string codigoGerente, decimal salario)
+        public Empelado(string codigoGerente, decimal salario)
         {
-            this.codigoGerente = codigoGerente;
+            this.codigoEmpleado = codigoGerente;
             this.salario = salario;
         }
 
-         public Gerente crearNuevoGerente()
+         public Empelado crearNuevoGerente()
         {
-            Gerente gerente = new Gerente();
+            Empelado gerente = new Empelado();
             Persona persona = new Persona();
             string codigo, salario;
         
             Console.SetCursorPosition(20, 5); Console.Write("Registrar Datos Del Gerente");
 
             Console.SetCursorPosition(10, 7); Console.Write("Codigo Gerente:  ");
-            gerente.codigoGerente = generarCodigoAleatoriamente();
-            Console.SetCursorPosition(50, 7); Console.Write(gerente.codigoGerente);
+            gerente.codigoEmpleado = generarCodigoAleatoriamente();
+            Console.SetCursorPosition(50, 7); Console.Write(gerente.codigoEmpleado);
             persona = persona.crearNuevaPersona();
             gerente.id = persona.id;
             gerente.nombre = persona.nombre;

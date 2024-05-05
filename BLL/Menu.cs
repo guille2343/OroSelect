@@ -155,7 +155,7 @@ namespace BLL
             
             }
             
-            public void menuGerente()
+            public void menuEmpleado()
             {
                 GestionEmpleado gestionEmpleado = new GestionEmpleado();
                 int opcion;
@@ -230,7 +230,7 @@ namespace BLL
             }
             
             
-            public void menuEmpleado()
+            public void menuGerente()
             {
                 GestionGerente gestionGerente = new GestionGerente();
                 int opcion;

@@ -62,9 +62,9 @@ namespace DAL
         }
 
 
-        public List<Empelado> LeerEmpleadoDesdeArchivo(string nombreArchivo)
+        public List<Empleado> LeerEmpleadoDesdeArchivo(string nombreArchivo)
         {
-            List<Empelado> empleados = new List<Empelado>();
+            List<Empleado> empleados = new List<Empleado>();
 
             try
             {
@@ -85,7 +85,7 @@ namespace DAL
                         string[] atributos = linea.Split(',');
 
                         // Crear un nuevo objeto Cliente y agregarlo a la lista
-                        Empelado empleado = new Empelado
+                        Empleado empleado = new Empleado
                         {
                             codigoEmpleado = atributos[0],
                             id = atributos[1],

@@ -54,7 +54,6 @@ namespace ENTITY
             Console.SetCursorPosition(10, 19); Console.Write("OBSERVACIONES");
             Console.SetCursorPosition(40, 19); contratoCompra.descripcionContrato = Console.ReadLine();
             
-            Console.ReadKey();
             return contratoCompra;
         }
     }

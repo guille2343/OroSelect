@@ -1,4 +1,5 @@
-﻿using ENTITY;
+﻿using DAL;
+using ENTITY;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,148 +12,73 @@ namespace BLL
     public class GestionContratoCompra
     {
         public List<ContratoCompra> contratosCompra = new List<ContratoCompra>();
+        public List<Cliente> clientes = new List<Cliente>();
 
-        public GestionContratoCompra() { }  
+        public GestionContratoCompra() { }
 
-        public void generarContratoCompra()
+
+        public void generarUnContratoCompra()
         {
-            GestionCliente gestionCliente = new GestionCliente();
             Cliente cliente = new Cliente();
-            int opcion;
-            string opcionMenu;
-            bool salir = false;
+            ContratoCompra contratoCompra = new ContratoCompra();
+            ProductoOro productoOro = new ProductoOro();
+            PersistenciaCliente persistenciaCliente = new PersistenciaCliente();
+            clientes = persistenciaCliente.LeerClientesDesdeArchivo("clientes.txt");
+            string idComprador;
 
-            while (!salir)
+            while (true)
             {
+                Console.Clear();
+                Console.SetCursorPosition(48, 10); Console.Write("                                       ");
                 Console.SetCursorPosition(53, 1); Console.Write("Generar Contato Compra");
-                Console.SetCursorPosition(48, 3); Console.Write("Cliente");
-                Console.SetCursorPosition(48, 4); Console.Write("1. Cliente Nuevo");
-                Console.SetCursorPosition(48, 5); Console.Write("2. Seleccionar En Lista");
-                Console.SetCursorPosition(48, 7); Console.Write("Seleccione Una Opcion: ");
-
-                while (true)
+                Console.SetCursorPosition(48, 3); Console.Write("Identificacion Del Comprador:");
+                Console.SetCursorPosition(80, 3); idComprador = Console.ReadLine();
+                if (!String.IsNullOrEmpty(idComprador))
                 {
-                    Console.SetCursorPosition(48, 10); Console.Write("                                                            ");
-                    Console.SetCursorPosition(73, 7); Console.Write("      ");
-                    Console.SetCursorPosition(73, 7); opcionMenu = Console.ReadLine();
-                    validarEntero(opcionMenu);
-                    if (!String.IsNullOrEmpty(opcionMenu) && validarEntero(opcionMenu))
+                    int existeCliente =  clienteExiste(idComprador);
+                    if (existeCliente == -1)
                     {
-                        opcion = int.Parse(opcionMenu);
-                        break;
-                    }
-                    else
-                    {
-                        Console.SetCursorPosition(48, 10); Console.Write("Error... Solo Caracter Numerico, Intente Nuevamente");
-                        Console.ReadKey();
-                    }
-                }
-
-                switch (opcion)
-                {
-                    case 1:
                         Console.Clear();
                         cliente = cliente.crearNuevoCliente();
-                        gestionCliente.clienteAgregarALaLista(cliente);
-                        Console.ReadKey(); 
-                        Console.Clear();
-                        salir = true;
-                        break;
-                    case 2:
-                        cliente = clienteNuevoParaContrato();
-                        salir = true;
-                        break;
-                    default:
-                        Console.SetCursorPosition(48, 16); Console.Write("Opción no válida. Inténtalo de nuevo.");
+                        persistenciaCliente.GuardarClienteEnArchivo(cliente, "clientes.txt");
                         Console.ReadKey();
+                        Console.Clear();
                         break;
-                }
-            }
-
-            ProductoOro productoOro = new ProductoOro();
-            productoOro = productoOro.crearNuevoProductoOro();
-            Console.Clear();
-            ContratoCompra contratoCompra = new ContratoCompra();
-            contratoCompra = contratoCompra.generarContratoCompra(cliente, productoOro);
-            Console.Clear();
-        }
-
-        public Cliente clienteNuevoParaContrato()
-        {
-            Cliente cliente = new Cliente();
-            GestionCliente gestionCliente = new GestionCliente();
-            String codigo;
-            if (gestionCliente.listaClienteVacia())
-            {
-                Console.SetCursorPosition(48, 10); Console.Write("No Hay Elementos En La Lista");
-                Console.ReadKey();
-                Console.Clear();
-
-                cliente = cliente.crearNuevoCliente();
-                gestionCliente.clienteAgregarALaLista(cliente);
-                Console.ReadKey();
-                Console.Clear(); ;
-
-            }
-            else
-            {
-                bool seguir = true;
-                while (seguir )
-                {
-                    Console.SetCursorPosition(48, 11); Console.Write("                                             ");
-                    Console.SetCursorPosition(60, 8); Console.Write("                         ");
-                    Console.SetCursorPosition(53, 5); Console.Write("Consultar Cliente");
-                    Console.SetCursorPosition(48, 7); Console.Write("Ingrese el Código del Cliente a Consultar");
-                    Console.SetCursorPosition(48, 8); Console.Write("Codigo: ");
-                    Console.SetCursorPosition(60, 8); codigo = Console.ReadLine();
-
-                    if (!string.IsNullOrEmpty(codigo))
-                    {
-                        cliente = gestionCliente.clienteBuscarEnLista(codigo);
-
-                        if (cliente != null)
-                        {
-                            seguir = false;
-                        }
-                        else
-                        {
-                            Console.SetCursorPosition(48, 11); Console.Write("Error: Cliente no encontrado.");
-                            Console.ReadKey();
-                        }
+                        
                     }
                     else
                     {
-                        Console.SetCursorPosition(48, 11); Console.Write("Error: No se admiten campos vacíos.");
-                        Console.ReadKey();
+                        cliente = clientes[existeCliente];
+                        break;
                     }
                 }
-                Console.ReadKey();
-                Console.Clear();
-            }
-            return cliente;
-        }
-
-        public bool validarEntero(string dato)
-        {
-            int enteroProducto;
-            try
-            {
-                enteroProducto = int.Parse(dato);
-                if (enteroProducto <= 0)
+                else
                 {
-                    return false;
+                    Console.SetCursorPosition(48, 10); Console.Write("No Se Admiten Campos Vacios");
                 }
-
             }
-            catch (FormatException)
-            {
-                return false;
-            }
-            catch (OverflowException)
-            {
-                return false;
-            }
-            return true;
+            Console.Clear() ;
+            productoOro = productoOro.crearNuevoProductoOro();
+            Console.Clear();
+            contratoCompra = contratoCompra.generarContratoCompra(cliente,productoOro);
+            Console.ReadKey();
+            Console.Clear();
         }
+
+
+        public int clienteExiste(String codigo)
+        {
+            int encontro = -1;
+            for (int i = 0; i < clientes.Count; i++)
+            {
+                if (clientes[i].id.Equals(codigo))
+                {
+                    encontro = i;
+                }
+            }
+            return encontro;
+        }
+
+
     }
 }

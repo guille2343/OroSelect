@@ -1,4 +1,5 @@
-﻿using ENTITY;
+﻿using DAL;
+using ENTITY;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -11,44 +12,47 @@ namespace BLL
     public class GestionCliente
     {
         public List<Cliente> clientes = new List<Cliente>();
-
+      
         public GestionCliente()
         {
-
+            
         }
 
+        //esta funcion esta encargada de llenar la lista de clientes con la informacion que tenemos guardada en archivo de texto
+        public void descargarArchivoCliente()
+        {
+            PersistenciaCliente persistenciaCliente = new PersistenciaCliente();
+            clientes = persistenciaCliente.LeerClientesDesdeArchivo("clientes.txt");
+        }
 
+        //retorna un true si la lista esta vacia y false si en la lista hay objetos(es una validacion)
         public bool listaClienteVacia()
         {
             if (clientes.Count != 0) { return false; }
             return true;
         }
 
+        //esta funcion solo agrega clientes a la lista
         public void clienteAgregarALaLista(Cliente cliente)
         {
-
-            bool clienteExiste = false;
-
-            for (int i = 0; i < clientes.Count; i++)
-            {
-                if (clientes[i].id == cliente.id)
-                {
-                    clienteExiste = true;
-                    break;
-                }
-            }
-
-            if (clienteExiste)
-            {
-                Console.SetCursorPosition(10, 15); Console.WriteLine("El cliente ya existe en la lista.");
-            }
-            else
-            {
                 clientes.Add(cliente);
-            }
-
         }
 
+        //esta funcion valida que no hayan clientes repetidos en la lista 
+        public bool clienteRepetido(String codigo)
+        {
+            for (int i = 0; i < clientes.Count; i++)
+            {
+                if (clientes[i].id.Equals(codigo))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
+        //esta funcion busca un cliente de la lista de clientes y retorna ese cliente si lo encuentra, de lo contrario retorna null
         public Cliente clienteBuscarEnLista(String codigo)
         {
             for (int i = 0; i < clientes.Count; i++)
@@ -61,6 +65,8 @@ namespace BLL
             return null;
         }
 
+        //esta funcion busca un cliente en la lista y si lo encuentra lo elimina, retorna un booleano de confirmacion
+        //true si lo elimino, false si no lo hizo
         public bool clienteEliminarDeLista(String codigo)
         {
             int encontrado = -1;
@@ -82,11 +88,13 @@ namespace BLL
             return true;
         }
 
+        //esta es la funcion encargada de editar los datos de un cliente
         public void modificarDatosCliente()
         {
             Cliente cliente;
+            descargarArchivoCliente();//llamamos la funcion para cargar en la lista de la clase, los objetos que hayan en archivo
 
-            if (listaClienteVacia())
+            if (listaClienteVacia()) //validamos que si existen objetos en la lista
             {
                 Console.SetCursorPosition(48, 5); Console.Write("No Hay Elementos En La Lista");
                 Console.ReadKey();
@@ -95,8 +103,9 @@ namespace BLL
             else
             {
                 string codigo;
-                int intentos = 0, intentosRetantes = 3;
-                while (true && intentos != 3)
+                int intentos = 0, intentosRetantes = 3;//limitamos el intento de busqueda a 3 intentos, de lo contrario se saldra
+
+                while (true && intentos != 3)//bucle infinito hasta que los intentos sean 3 o hasta que se halle el objeto
                 {
                     Console.SetCursorPosition(48, 9); Console.Write("Intentos Restantes: " + intentosRetantes);
                     Console.SetCursorPosition(48, 11); Console.Write("                                             ");
@@ -106,15 +115,16 @@ namespace BLL
                     Console.SetCursorPosition(48, 8); Console.Write("Codigo: ");
                     Console.SetCursorPosition(60, 8); codigo = Console.ReadLine();
 
-                    if (!string.IsNullOrEmpty(codigo))
+                    if (!string.IsNullOrEmpty(codigo))//validacion de string vacios o nulos
                     {
                         cliente = clienteBuscarEnLista(codigo);
 
                         if (cliente != null)
                         {
+                            PersistenciaCliente persistenciaCliente = new PersistenciaCliente();
                             cliente = editarClienteAuxiliar(cliente);
-
-                            //clientes.Insert(posicionDelObjetoEnLista, cliente);
+                            //una vez modificado el objeto en la lista, sobre escribimos el archivo con el objeto modificado de esta forma se guardaran los cambios
+                            persistenciaCliente.sobreescribirClientesEnArchivo(clientes, "clientes.txt");
                             break;
                         }
                         else
@@ -139,6 +149,8 @@ namespace BLL
 
         }
 
+        //funcion axiliar de la que esta arriba, esto para que no se haga tan extensa una sola funcion, esta lleva 
+        //la logica de modificar los atributos del objeto y retorna el objeto mdificado
         public Cliente editarClienteAuxiliar(Cliente cliente)
         {   
             string telefono;
@@ -227,18 +239,33 @@ namespace BLL
             return cliente;
         }
 
+
+        //esta funncion es la funcion principal, encargada de guardar los clientes en lista 
         public void RegistrarClientes()
         {
+            descargarArchivoCliente();
+            PersistenciaCliente pc = new PersistenciaCliente(); 
             Cliente cliente = new Cliente();
             cliente = cliente.crearNuevoCliente();
-            clienteAgregarALaLista(cliente);
+            clienteRepetido(cliente.id);
+
+            if (clienteRepetido(cliente.id))
+            {
+                Console.SetCursorPosition(10, 15); Console.Write("Ya Existe Un Cliente Con Esta Identidifacion");
+            }
+            else
+            {
+                clienteAgregarALaLista(cliente);
+                pc.GuardarClienteEnArchivo(cliente, "clientes.txt");
+            }
             Console.ReadKey();
             Console.Clear();
         }
 
-
+        //funcion encargada de mosstrar en forma de lista los clientes existentes en el archivo
         public void mostrarListaClientes()
         {
+            descargarArchivoCliente();
             if (listaClienteVacia())
             {
                 Console.SetCursorPosition(48, 5); Console.Write("No Hay Elementos En La Lista");
@@ -272,10 +299,12 @@ namespace BLL
             Console.Clear();
         }
 
+        //esta funcion busca un cliente de la lista por su codigo
         public void consultarUnCliente()
         {
             Cliente cliente;   
             string codigo;
+            descargarArchivoCliente();
 
             if (listaClienteVacia())
             {
@@ -340,8 +369,11 @@ namespace BLL
             }
         }
 
+        //esta funcion busca un cliente por su id para eliminarlo
         public void eliminarCliente()
         {
+            descargarArchivoCliente();
+
             if (listaClienteVacia())
             {
                 Console.SetCursorPosition(48, 5); Console.Write("No Hay Elementos En La Lista");
@@ -368,8 +400,10 @@ namespace BLL
 
                         if (mensaje)
                         {
+                            PersistenciaCliente persistenciaCliente = new PersistenciaCliente();
                             Console.SetCursorPosition(48, 11); Console.Write("Se Elimino Correctamente");
                             Console.ReadKey();
+                            persistenciaCliente.sobreescribirClientesEnArchivo(clientes, "clientes.txt");
                             break;
                         }
                         else

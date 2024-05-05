@@ -28,18 +28,18 @@ namespace ENTITY
         
             Console.SetCursorPosition(10, 3); Console.Write("Codigo Contrato:  ");
             contrato.codigoContrato = generarCodigoAleatoriamente();
-            Console.SetCursorPosition(50, 3); Console.Write(contrato.codigoContrato);
+            Console.SetCursorPosition(35, 3); Console.Write(contrato.codigoContrato);
             Console.SetCursorPosition(10, 4); Console.Write("Fecha De Emision:  ");
             contrato.fechaEmisionContrato = DateTime.Today;
-            Console.SetCursorPosition(50, 4); Console.Write(contrato.fechaEmisionContrato);
+            Console.SetCursorPosition(35, 4); Console.Write(contrato.fechaEmisionContrato);
             while (true)
             {
                 Console.SetCursorPosition(10, 18); Console.Write("                                                     ");
-                Console.SetCursorPosition(50, 5); Console.Write("                                      ");
+                Console.SetCursorPosition(30, 5); Console.Write("                                      ");
         
                 Console.SetCursorPosition(10, 5); Console.Write("Estado Del Contrato: ");
                 Console.SetCursorPosition(10, 17); Console.Write("El Contrato Solo Puede Tener Dos Estados (CANCELADO/PENDIENTE)");
-                Console.SetCursorPosition(50, 5); estadoContrato = Console.ReadLine();
+                Console.SetCursorPosition(35, 5); estadoContrato = Console.ReadLine();
                 validarEstadoContrato(estadoContrato);
                 if (!String.IsNullOrEmpty(estadoContrato) && validarEstadoContrato(estadoContrato))
                 {

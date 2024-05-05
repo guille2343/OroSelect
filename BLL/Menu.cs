@@ -61,7 +61,8 @@ namespace BLL
                             break;
                         case 4:
                             Console.Clear();
-                            //menuGestionarContratos();
+                            GestionContratoCompra gestionContratoCompra = new GestionContratoCompra();
+                            gestionContratoCompra.generarUnContratoCompra();
                             break;
                         case 5:
                             Console.Clear();

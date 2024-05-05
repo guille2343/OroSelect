@@ -13,7 +13,26 @@ namespace BLL
 
          public GestionGerente() { }
         
-         public bool listaGerenteVacia()
+        
+        public void descargarArchivoGerente()
+        {
+            PersistenciaGerente persistenciaGerente = new PersistenciaGerente();
+            gerentes = persistenciaGerente.LeerGerenteDesdeArchivo("gerentes.txt");
+        }
+        
+        
+        public bool gerenteRepetido(String codigo)
+        {
+            for (int i = 0; i < gerentes.Count; i++)
+            {
+                if (gerentes[i].id.Equals(codigo))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        public bool listaGerenteVacia()
          {
              if (gerentes.Count != 0) { return false; }
              return true;
@@ -21,27 +40,7 @@ namespace BLL
         
          public void gerenteAgregarALaLista(Empelado gerente)
          {
-        
-             bool gerenteExiste = false;
-        
-             for (int i = 0; i < gerentes.Count; i++)
-             {
-                 if (gerentes[i].id == gerente.id)
-                 {
-                     gerenteExiste = true;
-                     break;
-                 }
-             }
-        
-             if (gerenteExiste)
-             {
-                 Console.SetCursorPosition(10, 15); Console.WriteLine("Ya Existe En La Lista.");
-             }
-             else
-             {
-                 gerentes.Add(gerente);
-             }
-        
+             gerentes.Add(gerente);
          }
         
          public Empelado gerenteBuscarEnLista(String codigo)
@@ -80,6 +79,7 @@ namespace BLL
          public void modificarDatosGerente()
          {
              Empelado gerente;
+            descargarArchivoGerente();
         
              if (listaGerenteVacia())
              {
@@ -108,9 +108,9 @@ namespace BLL
                          if (gerente != null)
                          {
                              gerente = editarGerenteAuxiliar(gerente);
-        
-                             //clientes.Insert(posicionDelObjetoEnLista, cliente);
-                             break;
+                            PersistenciaGerente persistenciaGerente = new PersistenciaGerente();
+                            persistenciaGerente.sobreescribirGerenteEnArchivo(gerentes, "gerentes.txt");
+                            break;
                          }
                          else
                          {
@@ -245,17 +245,31 @@ namespace BLL
         
          public void RegistrarGerente()
          {
-             Empelado gerente = new Empelado();
-             gerente = gerente.crearNuevoGerente();
-             gerenteAgregarALaLista(gerente);
-             Console.ReadKey();
-             Console.Clear();
+            descargarArchivoGerente();
+            PersistenciaGerente persistenciaGerente = new PersistenciaGerente();
+            Empelado gerente = new Empelado();
+            gerente = gerente.crearNuevoGerente();
+            gerenteRepetido(gerente.id);
+        
+            if (gerenteRepetido(gerente.id))
+            {
+                Console.SetCursorPosition(10, 15); Console.Write("Ya Existe Un Gerente Con Esta Identidifacion");
+            }
+            else
+            {
+                gerenteAgregarALaLista(gerente);
+                persistenciaGerente.GuardarGerenteEnArchivo(gerente, "gerentes.txt");
+            }
+            Console.ReadKey();
+            Console.Clear();
          }
         
         
          public void mostrarListaGerente()
          {
-             if (listaGerenteVacia())
+            descargarArchivoGerente();
+        
+            if (listaGerenteVacia())
              {
                  Console.SetCursorPosition(48, 5); Console.Write("No Hay Elementos En La Lista");
                  Console.ReadKey();
@@ -293,8 +307,8 @@ namespace BLL
         
          public void consultarUnGerente()
          {
-             Empelado gerente;
-        
+            descargarArchivoGerente();
+            Empelado gerente;
              string codigo;
         
              if (listaGerenteVacia())
@@ -364,7 +378,8 @@ namespace BLL
         
          public void eliminarGerente()
          {
-             if (listaGerenteVacia())
+            descargarArchivoGerente();
+            if (listaGerenteVacia())
              {
                  Console.SetCursorPosition(48, 5); Console.Write("No Hay Elementos En La Lista");
                  Console.ReadKey();
@@ -390,8 +405,10 @@ namespace BLL
         
                          if (mensaje)
                          {
+                            PersistenciaGerente persistenciaGerente = new PersistenciaGerente();
                              Console.SetCursorPosition(48, 11); Console.Write("Se Elimino Correctamente");
                              Console.ReadKey();
+                            persistenciaGerente.sobreescribirGerenteEnArchivo(gerentes, "gerentes.txt");
                              break;
                          }
                          else

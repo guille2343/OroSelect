@@ -10,7 +10,7 @@ namespace DAL
 {
     public class PersistenciaGerente
     {
-        public void sobreescribirGerenteEnArchivo(List<Empelado> gerentes, string nombreArchivo)
+        public void sobreescribirGerenteEnArchivo(List<Gerente> gerentes, string nombreArchivo)
         {
             try
             {
@@ -38,7 +38,7 @@ namespace DAL
 
 
         //
-        public void GuardarGerenteEnArchivo(Empelado gerente, string nombreArchivo)
+        public void GuardarGerenteEnArchivo(Gerente gerente, string nombreArchivo)
         {
             try
             {
@@ -62,9 +62,9 @@ namespace DAL
         }
 
 
-        public List<Empelado> LeerGerenteDesdeArchivo(string nombreArchivo)
+        public List<Gerente> LeerGerenteDesdeArchivo(string nombreArchivo)
         {
-            List<Empelado> gerentes = new List<Empelado>();
+            List<Gerente> gerentes = new List<Gerente>();
 
             try
             {
@@ -85,7 +85,7 @@ namespace DAL
                         string[] atributos = linea.Split(',');
 
                         // Crear un nuevo objeto Cliente y agregarlo a la lista
-                        Empelado gerente = new Empelado
+                        Gerente gerente = new Gerente
                         {
                             codigoEmpleado = atributos[0],
                             id = atributos[1],

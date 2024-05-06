@@ -10,7 +10,7 @@ namespace BLL
 {
     public class GestionGerente
     {
-         public List<Empelado> gerentes = new List<Empelado>();
+         public List<Gerente> gerentes = new List<Gerente>();
 
          public GestionGerente() { }
 
@@ -39,12 +39,12 @@ namespace BLL
              return true;
          }
         
-         public void gerenteAgregarALaLista(Empelado gerente)
+         public void gerenteAgregarALaLista(Gerente gerente)
          {
              gerentes.Add(gerente);
          }
         
-         public Empelado gerenteBuscarEnLista(String codigo)
+         public Gerente gerenteBuscarEnLista(String codigo)
          {
              for (int i = 0; i < gerentes.Count; i++)
              {
@@ -79,7 +79,7 @@ namespace BLL
         
          public void modificarDatosGerente()
          {
-             Empelado gerente;
+             Gerente gerente;
             descargarArchivoGerente();
         
              if (listaGerenteVacia())
@@ -135,7 +135,7 @@ namespace BLL
         
          }
         
-         public Empelado editarGerenteAuxiliar(Empelado gerente)
+         public Gerente editarGerenteAuxiliar(Gerente gerente)
          {
              string telefono, salario;
         
@@ -248,7 +248,7 @@ namespace BLL
          {
             descargarArchivoGerente();
             PersistenciaGerente persistenciaGerente = new PersistenciaGerente();
-            Empelado gerente = new Empelado();
+            Gerente gerente = new Gerente();
             gerente = gerente.crearNuevoGerente();
             gerenteRepetido(gerente.id);
 
@@ -309,7 +309,7 @@ namespace BLL
          public void consultarUnGerente()
          {
             descargarArchivoGerente();
-            Empelado gerente;
+            Gerente gerente;
              string codigo;
         
              if (listaGerenteVacia())

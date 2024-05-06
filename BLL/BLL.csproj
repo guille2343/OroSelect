@@ -44,7 +44,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GestionContratoCompra.cs" />
-    <Compile Include="GestionContratoCompromiso.cs" />
     <Compile Include="GestionEmpleado.cs" />
     <Compile Include="GestionCliente.cs" />
     <Compile Include="GestionContratoVenta.cs" />

@@ -61,6 +61,18 @@ namespace BLL
             productoOro = productoOro.crearNuevoProductoOro();
             Console.Clear();
             contratoCompra = contratoCompra.generarContratoCompra(cliente,productoOro);
+            contratoCompra.idComprador = cliente.id;
+            contratoCompra.apellidoComprador = cliente.apellido;
+            contratoCompra.nombreComprador = cliente.nombre;
+            contratoCompra.telefonoComprador = cliente.telefono;
+            contratoCompra.pesoProducto = productoOro.pesoProductoOro;
+            contratoCompra.valorPorGramoOro = productoOro.precioPorGramoOro;
+            contratoCompra.purezaProducto = productoOro.pureza;
+            contratoCompra.valorProducto = productoOro.calcularValorProductoOro(productoOro.precioPorGramoOro, productoOro.pesoProductoOro);
+            contratoCompra.descripciobProducto = productoOro.descripcionProducto;
+            contratosCompra.Add(contratoCompra);
+            PersistenciaContatoCompra persistenciaContatoCompra = new PersistenciaContatoCompra();
+            persistenciaContatoCompra.GuardarContratoCompraEnArchivo(contratoCompra, "contratosCompra.txt");
             Console.ReadKey();
             Console.Clear();
         }

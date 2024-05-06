@@ -8,25 +8,40 @@ namespace ENTITY
 {
     public class ContratoCompra : Contrato
     {
-        public Cliente cliente { get; set; }
-        public ProductoOro productoOro { get; set; }
-        public decimal valorContrato { get; set; }
+        
+        public string idComprador {  get; set; }
+        public string apellidoComprador { get; set; }
+        public string nombreComprador { get; set; }
+        public string telefonoComprador { get; set; }
+        public decimal valorPorGramoOro {  get; set; }
+        public decimal pesoProducto { get; set; }
+        public int purezaProducto { get; set; }
+        public string descripciobProducto { get; set; }
+        public decimal valorProducto { get; set; }
         public string descripcionContrato { get; set; }
         
-        public ContratoCompra () { }
-        
-        public ContratoCompra (Cliente cliente, ProductoOro productoOro, decimal valorContrato, string descripcionContrato)
+        public ContratoCompra() { }
+
+        public ContratoCompra(string idComprador, string apellidoComprador, string nombreComprador, string telefonoComprador, decimal valorPorGramoOro, decimal pesoProducto, int purezaProducto, string descripciobProducto, decimal valorProducto, string descripcionContrato)
         {
-            this.cliente = cliente;
-            this.productoOro = productoOro;
-            this.valorContrato = valorContrato;
+            this.idComprador = idComprador;
+            this.apellidoComprador = apellidoComprador;
+            this.nombreComprador = nombreComprador;
+            this.telefonoComprador = telefonoComprador;
+            this.valorPorGramoOro = valorPorGramoOro;
+            this.pesoProducto = pesoProducto;
+            this.purezaProducto = purezaProducto;
+            this.descripciobProducto = descripciobProducto;
+            this.valorProducto = valorProducto;
             this.descripcionContrato = descripcionContrato;
         }
-        
+
         public ContratoCompra generarContratoCompra(Cliente cliente, ProductoOro productoOro)
         {
             ContratoCompra contratoCompra = new ContratoCompra();
-        
+
+            
+
             contratoCompra.emitirNuevoContrato();
             Console.SetCursorPosition(15, 7); Console.Write("DATOS DEL CLIENTE");
             Console.SetCursorPosition(10, 8); Console.Write("ID ");
@@ -43,7 +58,7 @@ namespace ENTITY
             Console.SetCursorPosition(25, 13); Console.Write("PESO ");
             Console.SetCursorPosition(25, 14); Console.Write(productoOro.pesoProductoOro);
             Console.SetCursorPosition(40, 13); Console.Write("PUREZA ");
-            Console.SetCursorPosition(40, 14); Console.Write(productoOro.pureza);
+            Console.SetCursorPosition(40, 14); Console.Write(productoOro.pesoProductoOro);
             Console.SetCursorPosition(55, 13); Console.Write("DESCRIPCION ");
             Console.SetCursorPosition(55, 14); Console.Write(productoOro.descripcionProducto);
             Console.SetCursorPosition(70, 13); Console.Write("VALOR  ");
@@ -53,7 +68,18 @@ namespace ENTITY
             Console.SetCursorPosition(40, 18); Console.Write(productoOro.calcularValorProductoOro(productoOro.precioPorGramoOro, productoOro.pesoProductoOro));
             Console.SetCursorPosition(10, 19); Console.Write("OBSERVACIONES");
             Console.SetCursorPosition(40, 19); contratoCompra.descripcionContrato = Console.ReadLine();
-            
+
+            idComprador = cliente.id;
+            apellidoComprador = cliente.apellido;
+            nombreComprador = cliente.nombre;
+            telefonoComprador = cliente.telefono;
+            pesoProducto = productoOro.pesoProductoOro;
+            valorPorGramoOro = productoOro.precioPorGramoOro;
+            purezaProducto = productoOro.pureza;
+            valorProducto = productoOro.calcularValorProductoOro(productoOro.precioPorGramoOro, productoOro.pesoProductoOro);
+            descripciobProducto = productoOro.descripcionProducto;
+
+
             return contratoCompra;
         }
     }

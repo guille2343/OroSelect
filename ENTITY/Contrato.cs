@@ -11,17 +11,35 @@ namespace ENTITY
         public String codigoContrato { get; set; }
         public DateTime fechaEmisionContrato { get; set; }
         public string estadoContrato { get; set; }
+        public string idComprador { get; set; }
+        public string apellidoComprador { get; set; }
+        public string nombreComprador { get; set; }
+        public string telefonoComprador { get; set; }
+        public int purezaProducto { get; set; }
+        public decimal pesoProducto { get; set; }
+        public decimal valorPorGramoOro { get; set; }
+        public decimal valorProducto { get; set; }    
+        public string descripciobProducto { get; set; }
 
-        public Contrato() { }   
+        public Contrato() { }
 
-        public Contrato(String codigoContrato, String estadoContrato)
+        public Contrato(string codigoContrato, DateTime fechaEmisionContrato, string estadoContrato, string idComprador, string apellidoComprador, string nombreComprador, string telefonoComprador, int purezaProducto, decimal pesoProducto, decimal valorPorGramoOro, decimal valorProducto, string descripciobProducto)
         {
             this.codigoContrato = codigoContrato;
+            this.fechaEmisionContrato = fechaEmisionContrato;
             this.estadoContrato = estadoContrato;
-            fechaEmisionContrato = DateTime.Today;
+            this.idComprador = idComprador;
+            this.apellidoComprador = apellidoComprador;
+            this.nombreComprador = nombreComprador;
+            this.telefonoComprador = telefonoComprador;
+            this.purezaProducto = purezaProducto;
+            this.pesoProducto = pesoProducto;
+            this.valorPorGramoOro = valorPorGramoOro;
+            this.valorProducto = valorProducto;
+            this.descripciobProducto = descripciobProducto;
         }
 
-        public Contrato emitirNuevoContrato()
+        public Contrato emitirNuevoContrato(Cliente cliente, ProductoOro producto)
         {
             Contrato contrato = new Contrato();
             string estadoContrato;
@@ -53,7 +71,38 @@ namespace ENTITY
                 }
             }
             Console.SetCursorPosition(10, 17); Console.Write("                                                                              ");
-        
+            contrato.idComprador = cliente.id;
+            contrato.apellidoComprador = cliente.apellido;
+            contrato.nombreComprador = cliente.nombre;
+            contrato.telefonoComprador = cliente.telefono;
+            contrato.purezaProducto = producto.pureza;
+            contrato.pesoProducto = producto.pesoProductoOro;
+            contrato.valorPorGramoOro = producto.precioPorGramoOro;
+            contrato.valorProducto = contrato.pesoProducto * contrato.valorPorGramoOro;
+            contrato.descripciobProducto = producto.descripcionProducto;
+
+            Console.SetCursorPosition(15, 7); Console.Write("DATOS DEL CLIENTE");
+            Console.SetCursorPosition(10, 8); Console.Write("ID ");
+            Console.SetCursorPosition(10, 9); Console.Write(contrato.idComprador);
+            Console.SetCursorPosition(25, 8); Console.Write("APELLIDO");
+            Console.SetCursorPosition(25, 9); Console.Write(contrato.apellidoComprador);
+            Console.SetCursorPosition(40, 8); Console.Write("NOMBRE ");
+            Console.SetCursorPosition(40, 9); Console.Write(contrato.nombreComprador);
+            Console.SetCursorPosition(55, 8); Console.Write("TELEFONO ");
+            Console.SetCursorPosition(55, 9); Console.Write(contrato.telefonoComprador);
+            Console.SetCursorPosition(15, 11); Console.Write("DATOS DEL PRODUCTO");
+            Console.SetCursorPosition(10, 13); Console.Write("PUREZA");
+            Console.SetCursorPosition(10, 14); Console.Write(contrato.purezaProducto);
+            Console.SetCursorPosition(25, 13); Console.Write("PESO ");
+            Console.SetCursorPosition(25, 14); Console.Write(contrato.pesoProducto);
+            Console.SetCursorPosition(40, 13); Console.Write("VALOR GRAMO ");
+            Console.SetCursorPosition(40, 14); Console.Write(contrato.valorPorGramoOro);
+            Console.SetCursorPosition(55, 13); Console.Write("VALOR TOTAL ");
+            Console.SetCursorPosition(55, 14); Console.Write(contrato.valorProducto);
+            Console.SetCursorPosition(70, 13); Console.Write("DESCRIPCCION");
+            Console.SetCursorPosition(70, 14); Console.Write(contrato.descripciobProducto);
+            Console.SetCursorPosition(5, 16); Console.Write("-------------------------------------------------------------------------------");
+            Console.ReadKey();
             return contrato;
         }
         

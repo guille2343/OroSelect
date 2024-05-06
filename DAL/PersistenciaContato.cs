@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class PersistenciaContatoCompra
+    public class PersistenciaContato
     {
-        public void sobreescribirContratoCompraEnArchivo(List<ContratoCompra> contratoscompra, string nombreArchivo)
+        public void sobreescribirContratoCompraEnArchivo(List<Contrato> contratos, string nombreArchivo)
         {
             try
             {
@@ -23,11 +23,11 @@ namespace DAL
                 // Escribir en el archivo
                 using (StreamWriter writer = new StreamWriter(rutaArchivo))
                 {
-                    foreach (var contratoCompra in contratoscompra)
+                    foreach (var contrato in contratos)
                     {
                         // Escribir cada cliente en una línea del archivo
-                        writer.WriteLine($"{contratoCompra.codigoContrato},{contratoCompra.fechaEmisionContrato},{contratoCompra.estadoContrato},{contratoCompra.idComprador},{contratoCompra.apellidoComprador},{contratoCompra.nombreComprador},{contratoCompra.telefonoComprador},{contratoCompra.valorPorGramoOro},{contratoCompra.pesoProducto}, {contratoCompra.purezaProducto}" +
-                            $"{contratoCompra.descripciobProducto},{contratoCompra.valorProducto},{contratoCompra.descripcionContrato}");
+                        writer.WriteLine($"{contrato.codigoContrato},{contrato.fechaEmisionContrato},{contrato.estadoContrato},{contrato.idComprador},{contrato.apellidoComprador},{contrato.nombreComprador},{contrato.telefonoComprador},{contrato.purezaProducto},{contrato.pesoProducto}, {contrato.valorPorGramoOro}" +
+                            $"{contrato.valorProducto},{contrato.descripciobProducto}");
                     }
                 }
             }
@@ -39,7 +39,7 @@ namespace DAL
 
 
         //
-        public void GuardarContratoCompraEnArchivo(ContratoCompra contratoCompra, string nombreArchivo)
+        public void GuardarContratoCompraEnArchivo(Contrato contrato, string nombreArchivo)
         {
             try
             {
@@ -53,8 +53,8 @@ namespace DAL
                 using (StreamWriter writer = new StreamWriter(rutaArchivo, true))
                 {
                     // Escribir el cliente en una línea del archivo
-                    writer.WriteLine($"{contratoCompra.codigoContrato},{contratoCompra.fechaEmisionContrato},{contratoCompra.estadoContrato},{contratoCompra.idComprador},{contratoCompra.apellidoComprador},{contratoCompra.nombreComprador},{contratoCompra.telefonoComprador},{contratoCompra.valorPorGramoOro},{contratoCompra.pesoProducto}, {contratoCompra.purezaProducto}" +
-                            $"{contratoCompra.descripciobProducto},{contratoCompra.valorProducto},{contratoCompra.descripcionContrato}");
+                    writer.WriteLine($"{contrato.codigoContrato},{contrato.fechaEmisionContrato},{contrato.estadoContrato},{contrato.idComprador},{contrato.apellidoComprador},{contrato.nombreComprador},{contrato.telefonoComprador},{contrato.purezaProducto},{contrato.pesoProducto}, {contrato.valorPorGramoOro}" +
+                            $"{contrato.valorProducto},{contrato.descripciobProducto}");
                 }
             }
             catch (Exception ex)
@@ -64,9 +64,9 @@ namespace DAL
         }
 
 
-        public List<ContratoCompra> LeerContratoCompraDesdeArchivo(string nombreArchivo)
+        public List<Contrato> LeerContratoCompraDesdeArchivo(string nombreArchivo)
         {
-            List<ContratoCompra> contratosCompra = new List<ContratoCompra>();
+            List<Contrato> contratos = new List<Contrato>();
 
             try
             {
@@ -87,21 +87,24 @@ namespace DAL
                         string[] atributos = linea.Split(',');
 
                         // Crear un nuevo objeto Cliente y agregarlo a la lista
-                        ContratoCompra contratoCompra = new ContratoCompra
+                        Contrato contrato = new Contrato
                         {
-                            idComprador = atributos[0],
-                            apellidoComprador = atributos[1],
-                            nombreComprador = atributos[2],
-                            telefonoComprador = atributos[3],
-                            valorPorGramoOro = decimal.Parse( atributos[4]),
-                            pesoProducto = decimal.Parse(atributos[5]),
-                            purezaProducto = int.Parse(atributos[6]),
-                            descripciobProducto = atributos[7],
-                            valorProducto = decimal.Parse(atributos[8]),
-                            descripcionContrato = atributos[9]
-                        };
+                            codigoContrato = atributos[0],
+                            fechaEmisionContrato = DateTime.Parse(atributos[1]),
+                            estadoContrato = atributos[2],
+                            idComprador = atributos[3],
+                            apellidoComprador = atributos[4],
+                            nombreComprador = atributos[5],
+                            telefonoComprador = atributos[6],
+                            purezaProducto = int.Parse(atributos[7]),
+                            pesoProducto = decimal.Parse(atributos[8]),
+                            valorPorGramoOro = decimal.Parse(atributos[9]),
+                            valorProducto = decimal.Parse(atributos[10]),
+                            descripciobProducto = atributos[11]
 
-                        contratosCompra.Add(contratoCompra);
+                    };
+
+                        contratos.Add(contrato);
                     }
                 }
 
@@ -111,7 +114,7 @@ namespace DAL
                 Console.WriteLine("Error al leer el archivo");
             }
 
-            return contratosCompra;
+            return contratos;
         }
     }
 }

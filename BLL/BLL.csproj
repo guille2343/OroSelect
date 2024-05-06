@@ -43,10 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GestionContratoCompra.cs" />
+    <Compile Include="GestionContrato.cs" />
     <Compile Include="GestionEmpleado.cs" />
     <Compile Include="GestionCliente.cs" />
-    <Compile Include="GestionContratoVenta.cs" />
     <Compile Include="GestionGerente.cs" />
     <Compile Include="GestionInventario.cs" />
     <Compile Include="Menu.cs" />

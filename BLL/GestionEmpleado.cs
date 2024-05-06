@@ -1,4 +1,5 @@
-﻿using ENTITY;
+﻿using DAL;
+using ENTITY;
 using System;
 using System.Collections.Generic;
 using System.Linq;

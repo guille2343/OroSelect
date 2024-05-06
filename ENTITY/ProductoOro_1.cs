@@ -7,22 +7,22 @@ using System.Threading.Tasks;
 
 namespace ENTITY
 {
-    public class Empelado : Persona
+    public class ProductoOro : Persona
     {
         public string codigoEmpleado { get; set; }
         public decimal salario { get; set; }
 
-        public Empelado() { }
+        public ProductoOro() { }
 
-        public Empelado(string codigoGerente, decimal salario)
+        public ProductoOro(string codigoGerente, decimal salario)
         {
             this.codigoEmpleado = codigoGerente;
             this.salario = salario;
         }
 
-         public Empelado crearNuevoGerente()
+         public ProductoOro crearNuevoGerente()
         {
-            Empelado gerente = new Empelado();
+            ProductoOro gerente = new ProductoOro();
             Persona persona = new Persona();
             string codigo, salario;
         

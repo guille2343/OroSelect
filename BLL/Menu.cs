@@ -61,7 +61,7 @@ namespace BLL
                             break;
                         case 4:
                             Console.Clear();
-                            GestionContratoCompra gestionContratoCompra = new GestionContratoCompra();
+                            GestionContrato gestionContratoCompra = new GestionContrato();
                             gestionContratoCompra.generarUnContratoCompra();
                             break;
                         case 5:
@@ -155,7 +155,7 @@ namespace BLL
             
             }
             
-            public void menuGerente()
+            public void menuEmpleado()
             {
                 GestionEmpleado gestionEmpleado = new GestionEmpleado();
                 int opcion;
@@ -230,7 +230,7 @@ namespace BLL
             }
             
             
-            public void menuEmpleado()
+            public void menuGerente()
             {
                 GestionGerente gestionGerente = new GestionGerente();
                 int opcion;
@@ -377,41 +377,41 @@ namespace BLL
             
             //}
             
-            public void submenuListaContratos(GestionContratoVenta gestionContrato)
-            {
-                int opcion;
-                string opcionMenu;
-                bool salir = false;
+            //public void submenuListaContratos(GestionContratoVenta gestionContrato)
+            //{
+            //    int opcion;
+            //    string opcionMenu;
+            //    bool salir = false;
             
-                while (!salir)
-                {
-                    Console.SetCursorPosition(53, 4); Console.Write("Oro Select");
-                    Console.SetCursorPosition(49, 5); Console.Write("Listados De Contratos");
-                    Console.SetCursorPosition(48, 7); Console.WriteLine("1. Contratos Cancelados");
-                    Console.SetCursorPosition(48, 8); Console.WriteLine("2. Contratos Vencidos");
-                    Console.SetCursorPosition(48, 9); Console.WriteLine("3. Contratos Pendientes ");
-                    Console.SetCursorPosition(48, 10); Console.WriteLine("4. Volver A Gestion De Contratos");
+            //    while (!salir)
+            //    {
+            //        Console.SetCursorPosition(53, 4); Console.Write("Oro Select");
+            //        Console.SetCursorPosition(49, 5); Console.Write("Listados De Contratos");
+            //        Console.SetCursorPosition(48, 7); Console.WriteLine("1. Contratos Cancelados");
+            //        Console.SetCursorPosition(48, 8); Console.WriteLine("2. Contratos Vencidos");
+            //        Console.SetCursorPosition(48, 9); Console.WriteLine("3. Contratos Pendientes ");
+            //        Console.SetCursorPosition(48, 10); Console.WriteLine("4. Volver A Gestion De Contratos");
             
-                    Console.SetCursorPosition(48, 12); Console.Write("Selecciones Una Opcion: ");
+            //        Console.SetCursorPosition(48, 12); Console.Write("Selecciones Una Opcion: ");
             
-                    while (true)
-                    {
+            //        while (true)
+            //        {
             
-                        Console.SetCursorPosition(48, 16); Console.Write("                                                            ");
-                        Console.SetCursorPosition(73, 12); Console.Write("      ");
-                        Console.SetCursorPosition(73, 12); opcionMenu = Console.ReadLine();
-                        validarEntero(opcionMenu);
-                        if (!String.IsNullOrEmpty(opcionMenu) && validarEntero(opcionMenu))
-                        {
-                            opcion = int.Parse(opcionMenu);
-                            break;
-                        }
-                        else
-                        {
-                            Console.SetCursorPosition(48, 16); Console.Write("Error... Solo Caracter Numerico, Intente Nuevamente");
-                            Console.ReadKey();
-                        }
-                    }
+            //            Console.SetCursorPosition(48, 16); Console.Write("                                                            ");
+            //            Console.SetCursorPosition(73, 12); Console.Write("      ");
+            //            Console.SetCursorPosition(73, 12); opcionMenu = Console.ReadLine();
+            //            validarEntero(opcionMenu);
+            //            if (!String.IsNullOrEmpty(opcionMenu) && validarEntero(opcionMenu))
+            //            {
+            //                opcion = int.Parse(opcionMenu);
+            //                break;
+            //            }
+            //            else
+            //            {
+            //                Console.SetCursorPosition(48, 16); Console.Write("Error... Solo Caracter Numerico, Intente Nuevamente");
+            //                Console.ReadKey();
+            //            }
+            //        }
             
                     //switch (opcion)
                     //{
@@ -435,9 +435,9 @@ namespace BLL
                     //        Console.SetCursorPosition(48, 16); Console.Write("Opción no válida. Inténtalo de nuevo.");
                     //        Console.ReadKey();
                     //        break;
-                    //}
-                }
-            }
+            //        //}
+            //    }
+            //}
             
             public void gestionarProductos()
             {

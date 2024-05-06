@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 
 namespace BLL
 {
-    public class GestionContratoCompra
+    public class GestionContrato
     {
-        public List<ContratoCompra> contratosCompra = new List<ContratoCompra>();
+        public List<Contrato> contratos = new List<Contrato>();
         public List<Cliente> clientes = new List<Cliente>();
 
-        public GestionContratoCompra() { }
+        public GestionContrato() { }
 
 
         public void generarUnContratoCompra()
         {
             Cliente cliente = new Cliente();
-            ContratoCompra contratoCompra = new ContratoCompra();
+            Contrato contrato = new Contrato();
             ProductoOro productoOro = new ProductoOro();
             PersistenciaCliente persistenciaCliente = new PersistenciaCliente();
             clientes = persistenciaCliente.LeerClientesDesdeArchivo("clientes.txt");
@@ -59,8 +59,12 @@ namespace BLL
             }
             Console.Clear() ;
             productoOro = productoOro.crearNuevoProductoOro();
+            contrato = contrato.emitirNuevoContrato(cliente, productoOro);
+            PersistenciaContato persistenciaContato = new PersistenciaContato();
+            persistenciaContato.GuardarContratoCompraEnArchivo(contrato, "contratos.txt");
             Console.Clear();
-            contratoCompra = contratoCompra.generarContratoCompra(cliente,productoOro);
+            
+            
             Console.ReadKey();
             Console.Clear();
         }

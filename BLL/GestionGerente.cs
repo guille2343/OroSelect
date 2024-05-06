@@ -1,4 +1,5 @@
-﻿using ENTITY;
+﻿using DAL;
+using ENTITY;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,30 +10,11 @@ namespace BLL
 {
     public class GestionGerente
     {
-         public List<Empelado> gerentes = new List<Empelado>();
+         public List<Gerente> gerentes = new List<Gerente>();
 
          public GestionGerente() { }
         
-        
-        public void descargarArchivoGerente()
-        {
-            PersistenciaGerente persistenciaGerente = new PersistenciaGerente();
-            gerentes = persistenciaGerente.LeerGerenteDesdeArchivo("gerentes.txt");
-        }
-        
-        
-        public bool gerenteRepetido(String codigo)
-        {
-            for (int i = 0; i < gerentes.Count; i++)
-            {
-                if (gerentes[i].id.Equals(codigo))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-        public bool listaGerenteVacia()
+         public bool listaGerenteVacia()
          {
              if (gerentes.Count != 0) { return false; }
              return true;
@@ -40,7 +22,27 @@ namespace BLL
         
          public void gerenteAgregarALaLista(Empelado gerente)
          {
-             gerentes.Add(gerente);
+        
+             bool gerenteExiste = false;
+        
+             for (int i = 0; i < gerentes.Count; i++)
+             {
+                 if (gerentes[i].id == gerente.id)
+                 {
+                     gerenteExiste = true;
+                     break;
+                 }
+             }
+        
+             if (gerenteExiste)
+             {
+                 Console.SetCursorPosition(10, 15); Console.WriteLine("Ya Existe En La Lista.");
+             }
+             else
+             {
+                 gerentes.Add(gerente);
+             }
+        
          }
         
          public Empelado gerenteBuscarEnLista(String codigo)
@@ -79,7 +81,6 @@ namespace BLL
          public void modificarDatosGerente()
          {
              Empelado gerente;
-            descargarArchivoGerente();
         
              if (listaGerenteVacia())
              {
@@ -134,7 +135,7 @@ namespace BLL
         
          }
         
-         public Empelado editarGerenteAuxiliar(Empelado gerente)
+         public Gerente editarGerenteAuxiliar(Gerente gerente)
          {
              string telefono, salario;
         
@@ -245,31 +246,17 @@ namespace BLL
         
          public void RegistrarGerente()
          {
-            descargarArchivoGerente();
-            PersistenciaGerente persistenciaGerente = new PersistenciaGerente();
-            Empelado gerente = new Empelado();
-            gerente = gerente.crearNuevoGerente();
-            gerenteRepetido(gerente.id);
-        
-            if (gerenteRepetido(gerente.id))
-            {
-                Console.SetCursorPosition(10, 15); Console.Write("Ya Existe Un Gerente Con Esta Identidifacion");
-            }
-            else
-            {
-                gerenteAgregarALaLista(gerente);
-                persistenciaGerente.GuardarGerenteEnArchivo(gerente, "gerentes.txt");
-            }
-            Console.ReadKey();
-            Console.Clear();
+             Empelado gerente = new Empelado();
+             gerente = gerente.crearNuevoGerente();
+             gerenteAgregarALaLista(gerente);
+             Console.ReadKey();
+             Console.Clear();
          }
         
         
          public void mostrarListaGerente()
          {
-            descargarArchivoGerente();
-        
-            if (listaGerenteVacia())
+             if (listaGerenteVacia())
              {
                  Console.SetCursorPosition(48, 5); Console.Write("No Hay Elementos En La Lista");
                  Console.ReadKey();
@@ -307,8 +294,8 @@ namespace BLL
         
          public void consultarUnGerente()
          {
-            descargarArchivoGerente();
-            Empelado gerente;
+             Empelado gerente;
+        
              string codigo;
         
              if (listaGerenteVacia())

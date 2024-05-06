@@ -10,7 +10,7 @@ namespace ENTITY
     public class ProductoOro
     {
         public string codigoProducto {  get; set; }
-        public decimal valorProductoOro { get; set; }
+        public decimal validarEnteros { get; set; }
         public decimal pesoProductoOro { get; set; }
         public string descripcionProducto { get; set; }
         public int pureza { get; set; }
@@ -21,7 +21,7 @@ namespace ENTITY
         public ProductoOro(string codigoProducto, decimal valorProductoOro, decimal pesoProductoOro, string descripcionProductoO, int pureza)
         {
             this.codigoProducto = codigoProducto;
-            this.valorProductoOro = valorProductoOro;
+            this.validarEnteros = valorProductoOro;
             this.pesoProductoOro = pesoProductoOro;
             this.descripcionProducto = descripcionProductoO;
             this.pureza = pureza;
@@ -99,8 +99,8 @@ namespace ENTITY
             }
 
             Console.SetCursorPosition(10, 10); Console.Write("Valor Total Producto: ");
-            Console.SetCursorPosition(50, 10); productoOro.valorProductoOro = calcularValorProductoOro(productoOro.pesoProductoOro, productoOro.precioPorGramoOro);
-            Console.SetCursorPosition(50, 10); Console.Write(productoOro.valorProductoOro);
+            Console.SetCursorPosition(50, 10); productoOro.validarEnteros = calcularValorProductoOro(productoOro.pesoProductoOro, productoOro.precioPorGramoOro);
+            Console.SetCursorPosition(50, 10); Console.Write(productoOro.validarEnteros);
             Console.SetCursorPosition(10, 11); Console.Write("Decripcion Del Producto:");
             Console.SetCursorPosition(10, 12); productoOro.descripcionProducto = Console.ReadLine();
 

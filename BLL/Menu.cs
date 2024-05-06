@@ -228,9 +228,83 @@ namespace BLL
                 }
             
             }
-            
-            
-            public void menuGerente()
+
+        public void menuContrato()
+        {
+            GestionContrato gestionContrato = new GestionContrato();
+            int opcion;
+            string opcionMenu;
+            bool salir = false;
+
+            while (!salir)
+            {
+                Console.SetCursorPosition(53, 4); Console.Write("Oro Select");
+                Console.SetCursorPosition(49, 5); Console.Write("Gestionar Contratos");
+                Console.SetCursorPosition(48, 7); Console.WriteLine("1. Emitir Nuevo Contrato");
+                Console.SetCursorPosition(48, 8); Console.WriteLine("2. Realizar Abono Al Contrato");
+                Console.SetCursorPosition(48, 9); Console.WriteLine("3. Lista De Contratos ");
+                Console.SetCursorPosition(48, 10); Console.WriteLine("4. Consultar Contrato");
+                Console.SetCursorPosition(48, 11); Console.WriteLine("5. Eliminar Contrato");
+                Console.SetCursorPosition(48, 12); Console.WriteLine("6. Volver Al Menu Principal");
+
+                Console.SetCursorPosition(48, 14); Console.Write("Selecciones Una Opcion: ");
+
+                while (true)
+                {
+
+                    Console.SetCursorPosition(48, 18); Console.Write("                                                            ");
+                    Console.SetCursorPosition(73, 14); Console.Write("      ");
+                    Console.SetCursorPosition(73, 14); opcionMenu = Console.ReadLine();
+                    validarEntero(opcionMenu);
+                    if (!String.IsNullOrEmpty(opcionMenu) && validarEntero(opcionMenu))
+                    {
+                        opcion = int.Parse(opcionMenu);
+                        break;
+                    }
+                    else
+                    {
+                        Console.SetCursorPosition(48, 18); Console.Write("Error... Solo Caracter Numerico, Intente Nuevamente");
+                        Console.ReadKey();
+                    }
+                }
+
+                switch (opcion)
+                {
+                    case 1:
+                        Console.Clear();
+                        gestionContrato.generarUnContratoCompra();
+                        break;
+                    case 2:
+                        Console.Clear();
+                        
+                        break;
+                    case 3:
+                        Console.Clear();
+                        
+                        break;
+                    case 4:
+                        Console.Clear();
+                        
+                        break;
+                    case 5:
+                        Console.Clear();
+                        
+                        break;
+                    case 6:
+                        Console.Clear();
+                        salir = true;
+                        break;
+                    default:
+                        Console.SetCursorPosition(48, 18); Console.Write("Opción no válida. Inténtalo de nuevo.");
+                        Console.ReadKey();
+                        break;
+                }
+            }
+
+        }
+
+
+        public void menuGerente()
             {
                 GestionGerente gestionGerente = new GestionGerente();
                 int opcion;

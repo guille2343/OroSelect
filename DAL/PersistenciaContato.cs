@@ -26,8 +26,7 @@ namespace DAL
                     foreach (var contrato in contratos)
                     {
                         // Escribir cada cliente en una línea del archivo
-                        writer.WriteLine($"{contrato.codigoContrato},{contrato.fechaEmisionContrato},{contrato.estadoContrato},{contrato.idComprador},{contrato.apellidoComprador},{contrato.nombreComprador},{contrato.telefonoComprador},{contrato.purezaProducto},{contrato.pesoProducto}, {contrato.valorPorGramoOro}" +
-                            $"{contrato.valorProducto},{contrato.descripciobProducto}");
+                        writer.WriteLine($"{contrato.codigoContrato},{contrato.fechaEmisionContrato},{contrato.estadoContrato},{contrato.idComprador},{contrato.apellidoComprador},{contrato.nombreComprador},{contrato.telefonoComprador},{contrato.purezaProducto},{contrato.pesoProducto},{contrato.valorPorGramoOro},{contrato.valorProducto},{contrato.descripciobProducto},{contrato.saldoContrato}");
                     }
                 }
             }
@@ -53,8 +52,7 @@ namespace DAL
                 using (StreamWriter writer = new StreamWriter(rutaArchivo, true))
                 {
                     // Escribir el cliente en una línea del archivo
-                    writer.WriteLine($"{contrato.codigoContrato},{contrato.fechaEmisionContrato},{contrato.estadoContrato},{contrato.idComprador},{contrato.apellidoComprador},{contrato.nombreComprador},{contrato.telefonoComprador},{contrato.purezaProducto},{contrato.pesoProducto}, {contrato.valorPorGramoOro}" +
-                            $"{contrato.valorProducto},{contrato.descripciobProducto}");
+                    writer.WriteLine($"{contrato.codigoContrato},{contrato.fechaEmisionContrato},{contrato.estadoContrato},{contrato.idComprador},{contrato.apellidoComprador},{contrato.nombreComprador},{contrato.telefonoComprador},{contrato.purezaProducto},{contrato.pesoProducto},{contrato.valorPorGramoOro},{contrato.valorProducto},{contrato.descripciobProducto},{contrato.saldoContrato}");
                 }
             }
             catch (Exception ex)
@@ -100,9 +98,10 @@ namespace DAL
                             pesoProducto = decimal.Parse(atributos[8]),
                             valorPorGramoOro = decimal.Parse(atributos[9]),
                             valorProducto = decimal.Parse(atributos[10]),
-                            descripciobProducto = atributos[11]
+                            descripciobProducto = atributos[11],
+                            saldoContrato = decimal.Parse(atributos[12])
 
-                    };
+                        };
 
                         contratos.Add(contrato);
                     }

@@ -20,10 +20,11 @@ namespace ENTITY
         public decimal valorPorGramoOro { get; set; }
         public decimal valorProducto { get; set; }    
         public string descripciobProducto { get; set; }
+        public decimal saldoContrato { get; set; }
 
         public Contrato() { }
 
-        public Contrato(string codigoContrato, DateTime fechaEmisionContrato, string estadoContrato, string idComprador, string apellidoComprador, string nombreComprador, string telefonoComprador, int purezaProducto, decimal pesoProducto, decimal valorPorGramoOro, decimal valorProducto, string descripciobProducto)
+        public Contrato(string codigoContrato, DateTime fechaEmisionContrato, string estadoContrato, string idComprador, string apellidoComprador, string nombreComprador, string telefonoComprador, int purezaProducto, decimal pesoProducto, decimal valorPorGramoOro, decimal valorProducto, string descripciobProducto, decimal saldoContrato)
         {
             this.codigoContrato = codigoContrato;
             this.fechaEmisionContrato = fechaEmisionContrato;
@@ -37,10 +38,12 @@ namespace ENTITY
             this.valorPorGramoOro = valorPorGramoOro;
             this.valorProducto = valorProducto;
             this.descripciobProducto = descripciobProducto;
+            this.saldoContrato = saldoContrato;
         }
 
         public Contrato emitirNuevoContrato(Cliente cliente, ProductoOro producto)
         {
+            Console.Clear();
             Contrato contrato = new Contrato();
             string estadoContrato;
         
@@ -97,19 +100,45 @@ namespace ENTITY
             Console.SetCursorPosition(25, 14); Console.Write(contrato.pesoProducto);
             Console.SetCursorPosition(40, 13); Console.Write("VALOR GRAMO ");
             Console.SetCursorPosition(40, 14); Console.Write(contrato.valorPorGramoOro);
-            Console.SetCursorPosition(55, 13); Console.Write("VALOR TOTAL ");
-            Console.SetCursorPosition(55, 14); Console.Write(contrato.valorProducto);
-            Console.SetCursorPosition(70, 13); Console.Write("DESCRIPCCION");
-            Console.SetCursorPosition(70, 14); Console.Write(contrato.descripciobProducto);
+            
+            Console.SetCursorPosition(55, 13); Console.Write("DESCRIPCCION");
+            Console.SetCursorPosition(55, 14); Console.Write(contrato.descripciobProducto);
             Console.SetCursorPosition(5, 16); Console.Write("-------------------------------------------------------------------------------");
+
+            Console.SetCursorPosition(10, 18); Console.Write("VALOR TOTAL ");
+            Console.SetCursorPosition(35, 18); Console.Write(contrato.valorProducto);
+            Console.SetCursorPosition(10, 19); Console.Write("SALDO ");
+
+            validarSaldoContrato(contrato.estadoContrato);
+            if (validarSaldoContrato(contrato.estadoContrato))
+            {
+                contrato.saldoContrato =contrato.valorProducto;
+                Console.SetCursorPosition(35, 19); Console.Write(contrato.saldoContrato);
+            }
+            else
+            {
+                contrato.saldoContrato = 0;
+                Console.SetCursorPosition(35, 19); Console.Write(contrato.saldoContrato);
+            }
+            
+            
+
             Console.ReadKey();
             return contrato;
+        }
+
+        public bool validarSaldoContrato(String estado)
+        {
+            if(estado.ToUpper().Trim() != "PENDIENTE")
+            {
+                return false;
+            }
+            return true;
         }
         
         public bool validarEstadoContrato(String estado)
         {
-            estado = estado.ToUpper();
-            if(estado != "PENDIENTE" && estado != "CANCELADO")
+            if(estado.ToUpper().Trim() != "PENDIENTE" && estado.ToUpper().Trim() != "CANCELADO")
             {
                 return false;
             }

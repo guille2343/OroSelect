@@ -275,11 +275,11 @@ namespace BLL
                         break;
                     case 2:
                         Console.Clear();
-                        
+                        gestionContrato.realizarAbonoAlContrato();
                         break;
                     case 3:
                         Console.Clear();
-                        
+                        gestionContrato.generarListaContratos();
                         break;
                     case 4:
                         Console.Clear();
@@ -287,7 +287,7 @@ namespace BLL
                         break;
                     case 5:
                         Console.Clear();
-                        
+                        gestionContrato.eliminarUnContrato();
                         break;
                     case 6:
                         Console.Clear();
@@ -376,141 +376,6 @@ namespace BLL
                 }
             
             }
-            //public void menuGestionarContratos()
-            //{
-            //    GestionContratoVenta gestionContrato = new GestionContratoVenta();
-            //    int opcion;
-            //    string opcionMenu;
-            //    bool salir = false;
-            
-            //    while (!salir)
-            //    {
-            //        Console.SetCursorPosition(53, 4); Console.Write("Oro Select");
-            //        Console.SetCursorPosition(49, 5); Console.Write("Gestion De Contratos");
-            //        Console.SetCursorPosition(48, 7); Console.WriteLine("1. Generar Nuevo Contrato");
-            //        Console.SetCursorPosition(48, 8); Console.WriteLine("2. Realizar Abono A Un Contrato");
-            //        Console.SetCursorPosition(48, 9); Console.WriteLine("3. Buscar Contrato ");
-            //        Console.SetCursorPosition(48, 10); Console.WriteLine("4. Listas Contratos");
-            //        Console.SetCursorPosition(48, 11); Console.WriteLine("5. Eliminar Contrato");
-            //        Console.SetCursorPosition(48, 12); Console.WriteLine("6. Volver Al Menu Principal");
-            
-            //        Console.SetCursorPosition(48, 14); Console.Write("Selecciones Una Opcion: ");
-            
-            //        while (true)
-            //        {
-            
-            //            Console.SetCursorPosition(48, 18); Console.Write("                                                            ");
-            //            Console.SetCursorPosition(73, 14); Console.Write("      ");
-            //            Console.SetCursorPosition(73, 14); opcionMenu = Console.ReadLine();
-            //            validarEntero(opcionMenu);
-            //            if (!String.IsNullOrEmpty(opcionMenu) && validarEntero(opcionMenu))
-            //            {
-            //                opcion = int.Parse(opcionMenu);
-            //                break;
-            //            }
-            //            else
-            //            {
-            //                Console.SetCursorPosition(48, 18); Console.Write("Error... Solo Caracter Numerico, Intente Nuevamente");
-            //                Console.ReadKey();
-            //            }
-            //        }
-            
-            //        switch (opcion)
-            //        {
-            //            case 1:
-            //                Console.Clear();
-            //                gestionContrato.generarContratoNuevo();
-            //                break;
-            //            case 2:
-            //                Console.Clear();
-            //                gestionContrato.abonarAContrato();
-            //                break;
-            //            case 3:
-            //                Console.Clear();
-            //                gestionContrato.buscarContrato();
-            //                break;
-            //            case 4:
-            //                Console.Clear();
-            //                submenuListaContratos(gestionContrato);
-            //                break;
-            //            case 5:
-            //                Console.Clear();
-            //                gestionContrato.eliminarContrato();
-            //                break;
-            //            case 6:
-            //                Console.Clear();
-            //                salir = true;
-            //                break;
-            //            default:
-            //                Console.SetCursorPosition(48, 18); Console.Write("Opción no válida. Inténtalo de nuevo.");
-            //                Console.ReadKey();
-            //                break;
-            //        }
-            //    }
-            
-            //}
-            
-            //public void submenuListaContratos(GestionContratoVenta gestionContrato)
-            //{
-            //    int opcion;
-            //    string opcionMenu;
-            //    bool salir = false;
-            
-            //    while (!salir)
-            //    {
-            //        Console.SetCursorPosition(53, 4); Console.Write("Oro Select");
-            //        Console.SetCursorPosition(49, 5); Console.Write("Listados De Contratos");
-            //        Console.SetCursorPosition(48, 7); Console.WriteLine("1. Contratos Cancelados");
-            //        Console.SetCursorPosition(48, 8); Console.WriteLine("2. Contratos Vencidos");
-            //        Console.SetCursorPosition(48, 9); Console.WriteLine("3. Contratos Pendientes ");
-            //        Console.SetCursorPosition(48, 10); Console.WriteLine("4. Volver A Gestion De Contratos");
-            
-            //        Console.SetCursorPosition(48, 12); Console.Write("Selecciones Una Opcion: ");
-            
-            //        while (true)
-            //        {
-            
-            //            Console.SetCursorPosition(48, 16); Console.Write("                                                            ");
-            //            Console.SetCursorPosition(73, 12); Console.Write("      ");
-            //            Console.SetCursorPosition(73, 12); opcionMenu = Console.ReadLine();
-            //            validarEntero(opcionMenu);
-            //            if (!String.IsNullOrEmpty(opcionMenu) && validarEntero(opcionMenu))
-            //            {
-            //                opcion = int.Parse(opcionMenu);
-            //                break;
-            //            }
-            //            else
-            //            {
-            //                Console.SetCursorPosition(48, 16); Console.Write("Error... Solo Caracter Numerico, Intente Nuevamente");
-            //                Console.ReadKey();
-            //            }
-            //        }
-            
-                    //switch (opcion)
-                    //{
-                    //    case 1:
-                    //        Console.Clear();
-                    //        gestionContrato.listarContratosCancelados();
-                    //        break;
-                    //    case 2:
-                    //        Console.Clear();
-                    //        gestionContrato.listarContratosVencidos();
-                    //        break;
-                    //    case 3:
-                    //        Console.Clear();
-                    //        gestionContrato.listarContratosPendientes();
-                    //        break;
-                    //    case 4:
-                    //        Console.Clear();
-                    //        salir = true;
-                    //        break;  
-                    //    default:
-                    //        Console.SetCursorPosition(48, 16); Console.Write("Opción no válida. Inténtalo de nuevo.");
-                    //        Console.ReadKey();
-                    //        break;
-            //        //}
-            //    }
-            //}
             
             public void gestionarProductos()
             {

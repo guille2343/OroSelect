@@ -125,18 +125,18 @@ namespace BLL
                 while (true && intentos != 3)
                 {
                     Console.Clear();
+                    Console.SetCursorPosition(48, 11); Console.Write("Intentos Restantes: " + intentosRestantes);
                     Console.SetCursorPosition(53, 5); Console.Write("Consultar Contrato");
                     Console.SetCursorPosition(48, 7); Console.Write("Ingrese El Codigo Del Contrato");
                     Console.SetCursorPosition(48, 8); Console.Write("Codigo: ");
                     Console.SetCursorPosition(58, 8); codigo = Console.ReadLine();
-                    Console.SetCursorPosition(48, 11); Console.Write("Intentos Restantes: " + intentosRestantes);
 
                     if (!string.IsNullOrEmpty(codigo))
                     {
                         contrato = buscarContratoEnLista(codigo);
                         if (contrato == null)
                         {
-                            Console.SetWindowPosition(48, 12); Console.Write("No Hay Elementos Con Ese Codigo");
+                            Console.SetCursorPosition(48, 12); Console.Write("No Hay Elementos Con Ese Codigo");
                             Console.ReadKey();
                             intentos++;
                             intentosRestantes--;
@@ -151,7 +151,7 @@ namespace BLL
                     {
                         intentos++;
                         intentosRestantes--;
-                        Console.SetCursorPosition(48, 11); Console.Write("No Se Admiten Campos Vacios");
+                        Console.SetCursorPosition(48, 12); Console.Write("No Se Admiten Campos Vacios");
                         Console.ReadKey();
                     }
                 }
@@ -162,6 +162,7 @@ namespace BLL
                 Console.SetCursorPosition(48, 10); Console.Write("No Hay Elementos En La Lista");
                 Console.ReadKey();
             }
+            Console.Clear();
         }
 
         public void mostrarInformacionContrato(Contrato contrato)
@@ -198,6 +199,63 @@ namespace BLL
             Console.SetCursorPosition(35, 19); Console.Write(contrato.saldoContrato);
             Console.ReadKey();
             Console.Clear();
+        }
+
+        public void generarListaContratos()
+        {
+            if (!listaVacia())
+            {
+                int posicionEnPnatalla = 8;
+
+                Console.Clear();
+                Console.SetCursorPosition(53, 5); Console.Write("LISTA DE CONTRATOS");
+                Console.SetCursorPosition(10, 7); Console.Write("CODIGO");
+                Console.SetCursorPosition(25, 7); Console.Write("ESTADO");
+                Console.SetCursorPosition(40, 7); Console.Write("ID. CLIENTE");
+                Console.SetCursorPosition(55, 7); Console.Write("APELLIDO");
+                Console.SetCursorPosition(70, 7); Console.Write("NOMBRE");
+                Console.SetCursorPosition(85, 7); Console.Write("VALOR");
+                Console.SetCursorPosition(100, 7); Console.Write("SALDO");
+
+                for(int i = 0; i < contratos.Count; i++)
+                {
+                    Console.SetCursorPosition(10, posicionEnPnatalla); Console.Write(contratos[i].codigoContrato);
+                    Console.SetCursorPosition(25, posicionEnPnatalla); Console.Write(contratos[i].estadoContrato);
+                    Console.SetCursorPosition(40, posicionEnPnatalla); Console.Write(contratos[i].idComprador);
+                    Console.SetCursorPosition(55, posicionEnPnatalla); Console.Write(contratos[i].apellidoComprador);
+                    Console.SetCursorPosition(70, posicionEnPnatalla); Console.Write(contratos[i].nombreComprador);
+                    Console.SetCursorPosition(85, posicionEnPnatalla); Console.Write(contratos[i].valorProducto);
+                    Console.SetCursorPosition(100, posicionEnPnatalla); Console.Write(contratos[i].saldoContrato);
+
+                    posicionEnPnatalla++;
+                }
+
+                Console.ReadKey();
+                Console.Clear();
+
+            }
+            else
+            {
+                Console.Clear();
+                Console.SetCursorPosition(48, 10); Console.Write("No Hay Elementos En La Lista");
+                Console.ReadKey();
+            }
+
+            Console.Clear();
+        }
+
+        public void realizarAbonoAlContrato()
+        {
+
+        }
+
+        public void consultarUnContrato()
+        {
+
+        }
+
+        public void eliminarUnContrato() {
+        
         }
     }
 }

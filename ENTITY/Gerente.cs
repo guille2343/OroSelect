@@ -26,11 +26,11 @@ namespace ENTITY
             Persona persona = new Persona();
             string codigo, salario;
         
-            Console.SetCursorPosition(20, 5); Console.Write("Registrar Datos Del Gerente");
+            Console.SetCursorPosition(53, 5); Console.Write("REGISRAR GERENTE");
 
-            Console.SetCursorPosition(10, 7); Console.Write("Codigo Gerente:  ");
+            Console.SetCursorPosition(48, 7); Console.Write("CODIGO:  ");
             gerente.codigoEmpleado = generarCodigoAleatoriamente();
-            Console.SetCursorPosition(50, 7); Console.Write(gerente.codigoEmpleado);
+            Console.SetCursorPosition(65, 7); Console.Write(gerente.codigoEmpleado);
             persona = persona.crearNuevaPersona();
             gerente.id = persona.id;
             gerente.nombre = persona.nombre;

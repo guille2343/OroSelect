@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -65,29 +66,6 @@ namespace BLL
             return null;
         }
 
-        //esta funcion busca un cliente en la lista y si lo encuentra lo elimina, retorna un booleano de confirmacion
-        //true si lo elimino, false si no lo hizo
-        public bool clienteEliminarDeLista(String codigo)
-        {
-            int encontrado = -1;
-
-            for (int i = 0; i < clientes.Count; i++)
-            {
-                if (clientes[i].id.Equals(codigo))
-                {
-                    clientes.RemoveAt(i);
-                    encontrado = i;
-                    break;
-                }
-            }
-            if (encontrado == -1)
-            {
-                return false;
-            }
-
-            return true;
-        }
-
         //esta es la funcion encargada de editar los datos de un cliente
         public void modificarDatosCliente()
         {
@@ -96,7 +74,9 @@ namespace BLL
 
             if (listaClienteVacia()) //validamos que si existen objetos en la lista
             {
-                Console.SetCursorPosition(48, 5); Console.Write("No Hay Elementos En La Lista");
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.SetCursorPosition(48, 10); Console.Write("No Se Encontraton Elementos En La Lista");
                 Console.ReadKey();
                 Console.Clear();
             }
@@ -107,12 +87,15 @@ namespace BLL
 
                 while (true && intentos != 3)//bucle infinito hasta que los intentos sean 3 o hasta que se halle el objeto
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.SetCursorPosition(48, 9); Console.Write("Intentos Restantes: " + intentosRetantes);
                     Console.SetCursorPosition(48, 11); Console.Write("                                             ");
                     Console.SetCursorPosition(60, 8); Console.Write("                         ");
-                    Console.SetCursorPosition(53, 5); Console.Write("Editar Cliente");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.SetCursorPosition(53, 5); Console.Write("MODIFICAR DATOS");
                     Console.SetCursorPosition(48, 7); Console.Write("Ingrese el Código del Cliente a Consultar");
                     Console.SetCursorPosition(48, 8); Console.Write("Codigo: ");
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
                     Console.SetCursorPosition(60, 8); codigo = Console.ReadLine();
 
                     if (!string.IsNullOrEmpty(codigo))//validacion de string vacios o nulos
@@ -129,7 +112,8 @@ namespace BLL
                         }
                         else
                         {
-                            Console.SetCursorPosition(48, 11); Console.Write("Error: Cliente no encontrado.");
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.SetCursorPosition(48, 11); Console.Write("Error: Registro no encontrado.");
                             Console.ReadKey();
                             intentos++;
                             intentosRetantes--;
@@ -137,13 +121,14 @@ namespace BLL
                     }
                     else
                     {
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.SetCursorPosition(48, 11); Console.Write("Error: No se admiten campos vacíos.");
                         Console.ReadKey();
                         intentos++;
                         intentosRetantes--;
                     }
                 }
-                Console.ReadKey();
+                Console.ResetColor();
                 Console.Clear();
             }
 
@@ -156,54 +141,65 @@ namespace BLL
             string telefono;
 
             Console.Clear();
-            Console.SetCursorPosition(53, 5); Console.Write("Datos del Cliente");
-            Console.SetCursorPosition(48, 7); Console.Write("Código: ");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.SetCursorPosition(53, 5); Console.Write("DATOS DEL CLIENTE");
+            Console.SetCursorPosition(48, 7); Console.Write("CODIGO: ");
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.SetCursorPosition(70, 7); Console.Write(cliente.codigoCliente);
-            Console.SetCursorPosition(48, 8); Console.Write("No. Identificación: ");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.SetCursorPosition(48, 8); Console.Write("IDENTIFICACION: ");
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.SetCursorPosition(70, 8); Console.Write(cliente.id);
 
 
             while (true)
             {
-                Console.SetCursorPosition(40, 17); Console.Write("                                                     ");
+                Console.SetCursorPosition(48, 17); Console.Write("                                                              ");
                 Console.SetCursorPosition(70, 9); Console.Write("                                                              ");
-
-                Console.SetCursorPosition(48, 9); Console.Write("Apellido: ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.SetCursorPosition(48, 9); Console.Write("APELLIDO: ");
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.SetCursorPosition(70, 9); cliente.apellido = Console.ReadLine();
                 if (!String.IsNullOrEmpty(cliente.apellido) && cliente.validarStringAceptarSoloLetras(cliente.apellido))
                 {
+                    cliente.apellido.ToUpper();
                     break;
                 }
                 else
                 {
-                    Console.SetCursorPosition(40, 17); Console.Write("Error: Solo Se Admiten Caracteres Alfabeticos");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.SetCursorPosition(48, 17); Console.Write("Error: Solo Se Admiten Caracteres Alfabeticos");
                     Console.ReadKey();
                 }
             }
             while (true)
             {
-                Console.SetCursorPosition(40, 17); Console.Write("                                                     ");
+                Console.SetCursorPosition(48, 17); Console.Write("                                                     ");
                 Console.SetCursorPosition(70, 10); Console.Write("                                                              ");
-
-                Console.SetCursorPosition(48, 10); Console.Write("Nombre: ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.SetCursorPosition(48, 10); Console.Write("NOMBRE: ");
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.SetCursorPosition(70, 10); cliente.nombre = Console.ReadLine();
                 if (!String.IsNullOrEmpty(cliente.nombre) && cliente.validarStringAceptarSoloLetras(cliente.nombre))
                 {
+                    cliente.nombre.ToUpper();
                     break;
                 }
                 else
                 {
-                    Console.SetCursorPosition(40, 17); Console.Write("Error: Solo Se Admiten Caracteres Alfabeticos");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.SetCursorPosition(48, 17); Console.Write("Error: Solo Se Admiten Caracteres Alfabeticos");
                     Console.ReadKey();
                 }
             }
 
             while (true)
             {
-                Console.SetCursorPosition(40, 17); Console.Write("                                                     ");
+                Console.SetCursorPosition(48, 17); Console.Write("                                                     ");
                 Console.SetCursorPosition(70, 11); Console.Write("                                   ");
-
-                Console.SetCursorPosition(48, 11); Console.Write("Teléfono: ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.SetCursorPosition(48, 11); Console.Write("TELEFONO: ");
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.SetCursorPosition(70, 11); telefono = Console.ReadLine();
                 cliente.validarLong(telefono);
 
@@ -214,29 +210,33 @@ namespace BLL
                 }
                 else
                 {
-                    Console.SetCursorPosition(40, 17); Console.Write("Error: Solo Se Admiten Valores Numericos 0-9");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.SetCursorPosition(48, 17); Console.Write("Error: Solo Se Admiten Valores Numericos 0-9");
                     Console.ReadKey();
                 }
             }
 
             while (true)
             {
-                Console.SetCursorPosition(40, 17); Console.Write("                                                     ");
-
-                Console.SetCursorPosition(48, 12); Console.Write("Direccion");
+                Console.SetCursorPosition(48, 17); Console.Write("                                                     ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.SetCursorPosition(48, 12); Console.Write("DIRECCION:");
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.SetCursorPosition(70, 12); cliente.direccion = Console.ReadLine();
                 if (!String.IsNullOrEmpty(cliente.direccion))
                 {
+                    cliente.direccion.ToUpper();
                     break;
                 }
                 else
                 {
-                    Console.SetCursorPosition(40, 17); Console.Write("Error: No Se Admiten Campos Vacios");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.SetCursorPosition(48, 17); Console.Write("Error: No Se Admiten Campos Vacios");
                     Console.ReadKey();
                 }
             }
-
-            return cliente;
+            Console.ResetColor();
+            return cliente;  
         }
 
 
@@ -251,14 +251,19 @@ namespace BLL
 
             if (clienteRepetido(cliente.id))
             {
-                Console.SetCursorPosition(10, 15); Console.Write("Ya Existe Un Cliente Con Esta Identidifacion");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.SetCursorPosition(48, 15); Console.Write("Ya Existe Un Registro Con Esta Identidifacion");
             }
             else
             {
                 clienteAgregarALaLista(cliente);
                 pc.GuardarClienteEnArchivo(cliente, "clientes.txt");
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.SetCursorPosition(48, 10); Console.Write("Almacenado De Forma Exitosa...");
+                Console.ReadKey();
             }
-            Console.ReadKey();
+            Console.ResetColor ();
             Console.Clear();
         }
 
@@ -268,14 +273,16 @@ namespace BLL
             descargarArchivoCliente();
             if (listaClienteVacia())
             {
-                Console.SetCursorPosition(48, 5); Console.Write("No Hay Elementos En La Lista");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.SetCursorPosition(48, 10); Console.Write("No Hay Elementos En La Lista...");
                 Console.ReadKey();
                 Console.Clear();
             }
             else
             {
                 int posicionPantalla = 8;
-                Console.SetCursorPosition(53, 5); Console.Write("Listado De Clientes");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.SetCursorPosition(53, 5); Console.Write("LISTADO DE CLIENTES");
                 Console.SetCursorPosition(10, 7); Console.Write("COIDIGO");
                 Console.SetCursorPosition(25, 7); Console.Write("ID");
                 Console.SetCursorPosition(40, 7); Console.Write("APELLIDO");
@@ -284,6 +291,7 @@ namespace BLL
                 Console.SetCursorPosition(85, 7); Console.Write("DIRECCION");
                 for (int i = 0; i < clientes.Count; i++)
                 {
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
                     Console.SetCursorPosition(10, posicionPantalla); Console.Write(clientes[i].codigoCliente);
                     Console.SetCursorPosition(25, posicionPantalla); Console.Write(clientes[i].id);
                     Console.SetCursorPosition(40, posicionPantalla); Console.Write(clientes[i].apellido);
@@ -295,6 +303,7 @@ namespace BLL
                 }
             }
 
+            Console.ResetColor();
             Console.ReadKey();
             Console.Clear();
         }
@@ -308,6 +317,7 @@ namespace BLL
 
             if (listaClienteVacia())
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.SetCursorPosition(48, 5); Console.Write("No Hay Elementos En La Lista");
                 Console.ReadKey();
                 Console.Clear();
@@ -318,12 +328,15 @@ namespace BLL
                 int intentos = 0, intentosRetantes = 3;
                 while (true && intentos != 3)
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.SetCursorPosition(48, 9); Console.Write("Intentos Restantes: " + intentosRetantes);
                     Console.SetCursorPosition(48, 11); Console.Write("                                             ");
                     Console.SetCursorPosition(60, 8); Console.Write("                         ");
-                    Console.SetCursorPosition(53, 5); Console.Write("Consultar Cliente");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.SetCursorPosition(53, 5); Console.Write("CONSULTAR CLIENTE");
                     Console.SetCursorPosition(48, 7); Console.Write("Ingrese el Código del Cliente a Consultar");
                     Console.SetCursorPosition(48, 8); Console.Write("Codigo: ");
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.SetCursorPosition(60, 8); codigo = Console.ReadLine();
 
                     if (!string.IsNullOrEmpty(codigo))
@@ -332,25 +345,13 @@ namespace BLL
 
                         if (cliente != null)
                         {
-                            Console.Clear();
-                            Console.SetCursorPosition(53, 5); Console.Write("Datos del Cliente");
-                            Console.SetCursorPosition(48, 7); Console.Write("Código: ");
-                            Console.SetCursorPosition(70, 7); Console.Write(cliente.codigoCliente);
-                            Console.SetCursorPosition(48, 8); Console.Write("No. Identificación: ");
-                            Console.SetCursorPosition(70, 8); Console.Write(cliente.id);
-                            Console.SetCursorPosition(48, 9); Console.Write("Apellido: ");
-                            Console.SetCursorPosition(70, 9); Console.Write(cliente.apellido);
-                            Console.SetCursorPosition(48, 10); Console.Write("Nombre: ");
-                            Console.SetCursorPosition(70, 10); Console.Write(cliente.nombre);
-                            Console.SetCursorPosition(48, 11); Console.Write("Teléfono: ");
-                            Console.SetCursorPosition(70, 11); Console.Write(cliente.telefono);
-                            Console.SetCursorPosition(48, 12); Console.Write("Direccion");
-                            Console.SetCursorPosition(70, 12); Console.Write(cliente.direccion);
+                            mostrarCliente(cliente);
                             break;
                         }
                         else
                         {
-                            Console.SetCursorPosition(48, 11); Console.Write("Error: Cliente no encontrado.");
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.SetCursorPosition(48, 11); Console.Write("Error: Registro no encontrado.");
                             Console.ReadKey();
                             intentos++;
                             intentosRetantes--;
@@ -358,15 +359,50 @@ namespace BLL
                     }
                     else
                     {
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.SetCursorPosition(48, 11); Console.Write("Error: No se admiten campos vacíos.");
                         Console.ReadKey();
                         intentos++;
                         intentosRetantes--;
                     }
                 }
+                Console.ResetColor();
                 Console.ReadKey();
                 Console.Clear();
             }
+        }
+
+        public void mostrarCliente (Cliente cliente)
+        {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.SetCursorPosition(53, 5); Console.Write("DATOS DEL CLIENTE");
+            Console.SetCursorPosition(48, 7); Console.Write("CODIGO: ");
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.SetCursorPosition(70, 7); Console.Write(cliente.codigoCliente);
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.SetCursorPosition(48, 8); Console.Write("IDENTIFICACION: ");
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.SetCursorPosition(70, 8); Console.Write(cliente.id);
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.SetCursorPosition(48, 9); Console.Write("APELLIDO: ");
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.SetCursorPosition(70, 9); Console.Write(cliente.apellido);
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.SetCursorPosition(48, 10); Console.Write("NOMBRE: ");
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.SetCursorPosition(70, 10); Console.Write(cliente.nombre);
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.SetCursorPosition(48, 11); Console.Write("TELEFONO: ");
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.SetCursorPosition(70, 11); Console.Write(cliente.telefono);
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.SetCursorPosition(48, 12); Console.Write("DIRECCION");
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.SetCursorPosition(70, 12); Console.Write(cliente.direccion);
+
+            Console.ResetColor();
+            Console.ReadKey();
         }
 
         //esta funcion busca un cliente por su id para eliminarlo
@@ -376,46 +412,72 @@ namespace BLL
 
             if (listaClienteVacia())
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.SetCursorPosition(48, 5); Console.Write("No Hay Elementos En La Lista");
                 Console.ReadKey();
                 Console.Clear();
             }
             else
             {
-                string id;
+                string codigo;
                 int intentos = 0, intentosRetantes = 3;
                 while (true && intentos != 3)
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.SetCursorPosition(48, 9); Console.Write("Intentos Restantes: " + intentosRetantes);
                     Console.SetCursorPosition(48, 11); Console.Write("                                                  ");
                     Console.SetCursorPosition(60, 8); Console.Write("                         ");
-                    Console.SetCursorPosition(53, 5); Console.Write("Eliminar Cliente");
-                    Console.SetCursorPosition(48, 7); Console.Write("Ingrese La Identificacion Del Cliente A Eliminar");
-                    Console.SetCursorPosition(48, 8); Console.Write("Id: ");
-                    Console.SetCursorPosition(60, 8); id = Console.ReadLine();
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.SetCursorPosition(53, 5); Console.Write("ELIMINAR CLIENTE");
+                    Console.SetCursorPosition(48, 7); Console.Write("Ingrese El Codigo Del Cliente A Eliminar");
+                    Console.SetCursorPosition(48, 8); Console.Write("Codigo: ");
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.SetCursorPosition(60, 8); codigo = Console.ReadLine();
 
-                    if (!string.IsNullOrEmpty(id))
+                    if (!string.IsNullOrEmpty(codigo))
                     {
-                        bool mensaje = clienteEliminarDeLista(id);
+                        int posicion = clienteEliminarDeLista(codigo);
 
-                        if (mensaje)
+                        if (posicion == -1)
                         {
-                            PersistenciaCliente persistenciaCliente = new PersistenciaCliente();
-                            Console.SetCursorPosition(48, 11); Console.Write("Se Elimino Correctamente");
-                            Console.ReadKey();
-                            persistenciaCliente.sobreescribirClientesEnArchivo(clientes, "clientes.txt");
-                            break;
-                        }
-                        else
-                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
                             Console.SetCursorPosition(48, 11); Console.Write("No Se Encontro Un Cliente Con Esa Id");
                             Console.ReadKey();
                             intentos++;
                             intentosRetantes--;
+
+                        }
+                        else
+                        {
+                            mostrarCliente(clientes[posicion]);
+                            if (confirmarEliminado())
+                            {
+                                Console.Clear();
+                                clientes.RemoveAt(posicion);
+                                Console.ForegroundColor = ConsoleColor.Green;
+                                Console.SetCursorPosition(40, 10); Console.Write("Registro Eliminado Correctamente...");
+                                PersistenciaCliente persistenciaCliente = new PersistenciaCliente();
+                                persistenciaCliente.sobreescribirClientesEnArchivo(clientes, "clientes.txt");
+                                Console.ReadKey();
+                                Console.Clear();
+                                break;
+                            }
+                            else
+                            {
+                                Console.Clear();
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.SetCursorPosition(40, 10); Console.Write("Proceso Abortado...");
+                                Console.ReadKey();
+                                Console.Clear();
+                                break;
+                            }
+
+                           
                         }
                     }
                     else
                     {
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.SetCursorPosition(48, 11); Console.Write("Error: No Se Admiten Campos Vacios.");
                         Console.ReadKey();
                         intentos++;
@@ -423,7 +485,101 @@ namespace BLL
                     }
                 }
             }
+            Console.ResetColor();
             Console.Clear();
+        }
+
+
+        //esta funcion busca un cliente en la lista y si lo encuentra lo elimina, retorna un booleano de confirmacion
+        //true si lo elimino, false si no lo hizo
+        public int clienteEliminarDeLista(String codigo)
+        {
+            int encontrado = -1;
+
+            for (int i = 0; i < clientes.Count; i++)
+            {
+                if (clientes[i].codigoCliente.Equals(codigo))
+                {
+                    encontrado = i;
+                }
+            }
+
+            return encontrado;
+        }
+
+        public bool confirmarEliminado()
+        {
+            int seleccion;
+            string opccion;
+            bool respuesta = true;
+            while (true)
+            {
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.SetCursorPosition(48, 10); Console.Write("Se Eliminara De Forma Permanente Este Contrato");
+                Console.SetCursorPosition(48, 12); Console.Write("Esta Seguro De Esto?");
+                Console.SetCursorPosition(48, 13); Console.Write("1. Confirmar.");
+                Console.SetCursorPosition(48, 14); Console.Write("2. Cancelar.");
+
+                Console.SetCursorPosition(48, 16); Console.Write("Seleccione Una Opcion");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.SetCursorPosition(48, 17); opccion = Console.ReadLine();
+
+                if (!string.IsNullOrEmpty(opccion))
+                {
+                    if (validarEntero(opccion))
+                    {
+                        seleccion = int.Parse(opccion);
+                        break;
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.SetCursorPosition(48, 20); Console.Write("Elija Una Opcion Valida");
+                        Console.ReadKey();
+                    }
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.SetCursorPosition(48, 20); Console.Write("No Se Admiten Campos Vacios");
+                    Console.ReadKey();
+                }
+            }
+            if (seleccion == 1)
+            {
+                respuesta = true;
+            }
+            else if (seleccion == 2)
+            {
+                respuesta = false;
+
+            }
+            Console.ResetColor();
+            return respuesta;
+        }
+
+        public bool validarEntero(string dato)
+        {
+            int enteroProducto;
+            try
+            {
+                enteroProducto = int.Parse(dato);
+                if (enteroProducto != 1 && enteroProducto != 2)
+                {
+                    return false;
+                }
+
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
+            catch (OverflowException)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

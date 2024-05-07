@@ -18,14 +18,15 @@ namespace ENTITY
 
          public Cliente crearNuevoCliente()
          {
-             Cliente cliente = new Cliente();
-             Persona persona = new Persona();
-        
-             Console.SetCursorPosition(20, 5); Console.Write("Registrar Nuevo Cliente");
-
-            Console.SetCursorPosition(10, 7); Console.Write("Codigo Cliente:  ");
+            Cliente cliente = new Cliente();
+            Persona persona = new Persona();
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.SetCursorPosition(53, 5); Console.Write("REGISTRAR CLIENTE");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.SetCursorPosition(48, 7); Console.Write("CODIGO:  ");
             cliente.codigoCliente = generarCodigoAleatoriamente();
-            Console.SetCursorPosition(50, 7); Console.Write(cliente.codigoCliente);
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.SetCursorPosition(65, 7); Console.Write(cliente.codigoCliente);
             persona = persona.crearNuevaPersona();
             cliente.id = persona.id;
             cliente.nombre = persona.nombre;

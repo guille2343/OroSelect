@@ -33,67 +33,76 @@ namespace ENTITY
 
             while (true)
             {
-                Console.SetCursorPosition(10, 17); Console.Write("                                                     ");
-               
-                Console.SetCursorPosition(10, 8); Console.Write("Digite El Numero De Identificacion: ");
-                Console.SetCursorPosition(50, 8); id = Console.ReadLine();
+                Console.SetCursorPosition(48, 17); Console.Write("                                                     ");
+                Console.SetCursorPosition(65, 8); Console.Write("                                                              ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.SetCursorPosition(48, 8); Console.Write("IDENTRIFICACION: ");
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.SetCursorPosition(65, 8); id = Console.ReadLine();
                 if (!String.IsNullOrEmpty(id))
                 {
-                    persona.id = id;
+                    persona.id = id.ToUpper();
                     break;
                 }
                 else
                 {
-                    Console.SetCursorPosition(10, 17); Console.Write("Error: No Se Admiten Campos Vacios");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.SetCursorPosition(48, 17); Console.Write("Error: No Se Admiten Campos Vacios");
                     Console.ReadKey();
                 }
             }
 
             while (true)
             {
-                Console.SetCursorPosition(10, 17); Console.Write("                                                     ");
-                Console.SetCursorPosition(50, 9); Console.Write("                                                              ");
-
-                Console.SetCursorPosition(10, 9); Console.Write("Digite El Nombre(s): ");
-                Console.SetCursorPosition(50, 9); nombre = Console.ReadLine();
+                Console.SetCursorPosition(48, 17); Console.Write("                                                     ");
+                Console.SetCursorPosition(65, 9); Console.Write("                                                              ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.SetCursorPosition(48, 9); Console.Write("NOMBRE: ");
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.SetCursorPosition(65, 9); nombre = Console.ReadLine();
                 if (!String.IsNullOrEmpty(nombre) && validarStringAceptarSoloLetras(nombre))
                 {
-                    persona.nombre = nombre;
+                    persona.nombre = nombre.ToUpper();
                     break;
                 }
                 else
                 {
-                    Console.SetCursorPosition(10, 17); Console.Write("Error: Solo Se Admiten Caracteres Alfabeticos");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.SetCursorPosition(48, 17); Console.Write("Error: Solo Se Admiten Caracteres Alfabeticos");
                     Console.ReadKey();
                 }
             }
 
             while (true)
             {
-                Console.SetCursorPosition(10, 17); Console.Write("                                                     ");
-                Console.SetCursorPosition(50, 10); Console.Write("                                                              ");
 
-                Console.SetCursorPosition(10, 10); Console.Write("Digite Los Apellidos: ");
-                Console.SetCursorPosition(50, 10); apellido = Console.ReadLine();
+                Console.SetCursorPosition(48, 17); Console.Write("                                                     ");
+                Console.SetCursorPosition(65, 10); Console.Write("                                                              ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.SetCursorPosition(48, 10); Console.Write("APELLIDO: ");
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.SetCursorPosition(65, 10); apellido = Console.ReadLine();
                 if (!String.IsNullOrEmpty(apellido) && validarStringAceptarSoloLetras(apellido))
                 {
-                    persona.apellido = apellido;
+                    persona.apellido = apellido.ToUpper();
                     break;
                 }
                 else
                 {
-                    Console.SetCursorPosition(10, 17); Console.Write("Error: Solo Se Admiten Caracteres Alfabeticos");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.SetCursorPosition(48, 17); Console.Write("Error: Solo Se Admiten Caracteres Alfabeticos");
                     Console.ReadKey();
                 }
             }
 
             while (true)
             {
-                Console.SetCursorPosition(10, 17); Console.Write("                                                     ");
-                Console.SetCursorPosition(50, 11); Console.Write("                                   ");
-
-                Console.SetCursorPosition(10, 11); Console.Write("Digite El Telefono: ");
-                Console.SetCursorPosition(50, 11); telefono = Console.ReadLine();
+                Console.SetCursorPosition(48, 17); Console.Write("                                                     ");
+                Console.SetCursorPosition(65, 11); Console.Write("                                   ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.SetCursorPosition(48, 11); Console.Write("TELEFONO: ");
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.SetCursorPosition(65, 11); telefono = Console.ReadLine();
                 validarLong(telefono);
 
                 if (!String.IsNullOrEmpty(telefono) && validarLong(telefono))
@@ -103,17 +112,19 @@ namespace ENTITY
                 }
                 else
                 {
-                    Console.SetCursorPosition(10, 17); Console.Write("Error: Solo Se Admiten Valores Numericos 0-9");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.SetCursorPosition(48, 17); Console.Write("Error: Solo Se Admiten Valores Numericos 0-9");
                     Console.ReadKey();
                 }
             }
 
             while (true)
             {
-                Console.SetCursorPosition(10, 17); Console.Write("                                                     ");
-                
-                Console.SetCursorPosition(10, 12); Console.Write("Digite La Direccion: ");
-                Console.SetCursorPosition(50, 12); direccion = Console.ReadLine();
+                Console.SetCursorPosition(48, 17); Console.Write("                                                     ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.SetCursorPosition(48, 12); Console.Write("DIRECCION: ");
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.SetCursorPosition(65, 12); direccion = Console.ReadLine();
                 if (!String.IsNullOrEmpty(direccion))
                 {
                     persona.direccion = direccion;
@@ -121,11 +132,12 @@ namespace ENTITY
                 }
                 else
                 {
-                    Console.SetCursorPosition(10, 17); Console.Write("Error: No Se Admiten Campos Vacios");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.SetCursorPosition(48, 17); Console.Write("Error: No Se Admiten Campos Vacios");
                     Console.ReadKey();
                 }
             }
-
+            Console.ResetColor();
             return persona; 
         }
 

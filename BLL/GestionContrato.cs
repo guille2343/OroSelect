@@ -47,9 +47,8 @@ namespace BLL
                     if (existeCliente == -1)
                     {
                         Console.Clear();
-                        cliente = cliente.crearNuevoCliente();
-                        persistenciaCliente.GuardarClienteEnArchivo(cliente, "clientes.txt");
-                        Console.ReadKey();
+                        cliente = nuevoCliente(idComprador);
+                        persistenciaCliente.GuardarClienteEnArchivo(cliente, "clientes.txt");             
                         Console.Clear();
                         break;
                         
@@ -62,6 +61,7 @@ namespace BLL
                 }
                 else
                 {
+
                     Console.SetCursorPosition(48, 10); Console.Write("No Se Admiten Campos Vacios");
                 }
             }
@@ -72,10 +72,114 @@ namespace BLL
             PersistenciaContato persistenciaContato = new PersistenciaContato();
             persistenciaContato.GuardarContratoCompraEnArchivo(contrato, "contratos.txt");
             Console.Clear();
-            
-            
-            Console.ReadKey();
             Console.Clear();
+        }
+
+        public Cliente nuevoCliente(String id)
+        {
+            Cliente cliente = new Cliente();
+            string nombre, apellido, telefono, direccion;
+
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.SetCursorPosition(53, 5); Console.Write("REGISTRAR CLIENTE");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.SetCursorPosition(48, 7); Console.Write("CODIGO:  ");
+            cliente.codigoCliente = cliente.generarCodigoAleatoriamente();
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.SetCursorPosition(65, 7); Console.Write(cliente.codigoCliente);
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.SetCursorPosition(48, 8); Console.Write("IDENTRIFICACION: ");
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.SetCursorPosition(65, 8); cliente.id = id.ToUpper();
+            Console.SetCursorPosition(65, 8); Console.Write(cliente.id);
+
+            while (true)
+            {
+                Console.SetCursorPosition(48, 17); Console.Write("                                                     ");
+                Console.SetCursorPosition(65, 9); Console.Write("                                                              ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.SetCursorPosition(48, 9); Console.Write("NOMBRE: ");
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.SetCursorPosition(65, 9); nombre = Console.ReadLine();
+                if (!String.IsNullOrEmpty(nombre) && cliente.validarStringAceptarSoloLetras(nombre))
+                {
+                    cliente.nombre = nombre.ToUpper();
+                    break;
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.SetCursorPosition(48, 17); Console.Write("Error: Solo Se Admiten Caracteres Alfabeticos");
+                    Console.ReadKey();
+                }
+            }
+
+            while (true)
+            {
+
+                Console.SetCursorPosition(48, 17); Console.Write("                                                     ");
+                Console.SetCursorPosition(65, 10); Console.Write("                                                              ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.SetCursorPosition(48, 10); Console.Write("APELLIDO: ");
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.SetCursorPosition(65, 10); apellido = Console.ReadLine();
+                if (!String.IsNullOrEmpty(apellido) && cliente.validarStringAceptarSoloLetras(apellido))
+                {
+                    cliente.apellido = apellido.ToUpper();
+                    break;
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.SetCursorPosition(48, 17); Console.Write("Error: Solo Se Admiten Caracteres Alfabeticos");
+                    Console.ReadKey();
+                }
+            }
+
+            while (true)
+            {
+                Console.SetCursorPosition(48, 17); Console.Write("                                                     ");
+                Console.SetCursorPosition(65, 11); Console.Write("                                   ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.SetCursorPosition(48, 11); Console.Write("TELEFONO: ");
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.SetCursorPosition(65, 11); telefono = Console.ReadLine();
+                cliente.validarLong(telefono);
+
+                if (!String.IsNullOrEmpty(telefono) && cliente.validarLong(telefono))
+                {
+                    cliente.telefono = telefono;
+                    break;
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.SetCursorPosition(48, 17); Console.Write("Error: Solo Se Admiten Valores Numericos 0-9");
+                    Console.ReadKey();
+                }
+            }
+
+            while (true)
+            {
+                Console.SetCursorPosition(48, 17); Console.Write("                                                     ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.SetCursorPosition(48, 12); Console.Write("DIRECCION: ");
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.SetCursorPosition(65, 12); direccion = Console.ReadLine();
+                if (!String.IsNullOrEmpty(direccion))
+                {
+                    cliente.direccion = direccion;
+                    break;
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.SetCursorPosition(48, 17); Console.Write("Error: No Se Admiten Campos Vacios");
+                    Console.ReadKey();
+                }
+            }
+            Console.ResetColor();
+            return cliente;
         }
 
 

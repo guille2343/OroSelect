@@ -4,8 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Security.Cryptography.X509Certificates; 
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace BLL
@@ -37,9 +39,11 @@ namespace BLL
             while (true)
             {
                 Console.Clear();
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.SetCursorPosition(48, 10); Console.Write("                                       ");
                 Console.SetCursorPosition(53, 1); Console.Write("Generar Contato Compra");
                 Console.SetCursorPosition(48, 3); Console.Write("Identificacion Del Comprador:");
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.SetCursorPosition(80, 3); idComprador = Console.ReadLine();
                 if (!String.IsNullOrEmpty(idComprador))
                 {
@@ -61,7 +65,7 @@ namespace BLL
                 }
                 else
                 {
-
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.SetCursorPosition(48, 10); Console.Write("No Se Admiten Campos Vacios");
                 }
             }
@@ -71,11 +75,116 @@ namespace BLL
             contratos.Add(contrato);
             PersistenciaContato persistenciaContato = new PersistenciaContato();
             persistenciaContato.GuardarContratoCompraEnArchivo(contrato, "contratos.txt");
-            Console.Clear();
 
-
-            Console.ReadKey();
+            Console.ResetColor();
             Console.Clear();
+        }
+
+        public Cliente nuevoCliente(String id)
+        {
+            Cliente cliente = new Cliente();
+            string nombre, apellido, telefono, direccion;
+
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.SetCursorPosition(53, 5); Console.Write("REGISTRAR CLIENTE");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.SetCursorPosition(48, 7); Console.Write("CODIGO:  ");
+            cliente.codigoCliente = cliente.generarCodigoAleatoriamente();
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.SetCursorPosition(65, 7); Console.Write(cliente.codigoCliente);
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.SetCursorPosition(48, 8); Console.Write("IDENTRIFICACION: ");
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.SetCursorPosition(65, 8); cliente.id = id.ToUpper();
+            Console.SetCursorPosition(65, 8); Console.Write(cliente.id);
+
+            while (true)
+            {
+                Console.SetCursorPosition(48, 17); Console.Write("                                                     ");
+                Console.SetCursorPosition(65, 9); Console.Write("                                                              ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.SetCursorPosition(48, 9); Console.Write("NOMBRE: ");
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.SetCursorPosition(65, 9); nombre = Console.ReadLine();
+                if (!String.IsNullOrEmpty(nombre) && cliente.validarStringAceptarSoloLetras(nombre))
+                {
+                    cliente.nombre = nombre.ToUpper();
+                    break;
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.SetCursorPosition(48, 17); Console.Write("Error: Solo Se Admiten Caracteres Alfabeticos");
+                    Console.ReadKey();
+                }
+            }
+
+            while (true)
+            {
+
+                Console.SetCursorPosition(48, 17); Console.Write("                                                     ");
+                Console.SetCursorPosition(65, 10); Console.Write("                                                              ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.SetCursorPosition(48, 10); Console.Write("APELLIDO: ");
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.SetCursorPosition(65, 10); apellido = Console.ReadLine();
+                if (!String.IsNullOrEmpty(apellido) && cliente.validarStringAceptarSoloLetras(apellido))
+                {
+                    cliente.apellido = apellido.ToUpper();
+                    break;
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.SetCursorPosition(48, 17); Console.Write("Error: Solo Se Admiten Caracteres Alfabeticos");
+                    Console.ReadKey();
+                }
+            }
+
+            while (true)
+            {
+                Console.SetCursorPosition(48, 17); Console.Write("                                                     ");
+                Console.SetCursorPosition(65, 11); Console.Write("                                   ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.SetCursorPosition(48, 11); Console.Write("TELEFONO: ");
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.SetCursorPosition(65, 11); telefono = Console.ReadLine();
+                cliente.validarLong(telefono);
+
+                if (!String.IsNullOrEmpty(telefono) && cliente.validarLong(telefono))
+                {
+                    cliente.telefono = telefono;
+                    break;
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.SetCursorPosition(48, 17); Console.Write("Error: Solo Se Admiten Valores Numericos 0-9");
+                    Console.ReadKey();
+                }
+            }
+
+            while (true)
+            {
+                Console.SetCursorPosition(48, 17); Console.Write("                                                     ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.SetCursorPosition(48, 12); Console.Write("DIRECCION: ");
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.SetCursorPosition(65, 12); direccion = Console.ReadLine();
+                if (!String.IsNullOrEmpty(direccion))
+                {
+                    cliente.direccion = direccion;
+                    break;
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.SetCursorPosition(48, 17); Console.Write("Error: No Se Admiten Campos Vacios");
+                    Console.ReadKey();
+                }
+            }
+            Console.ResetColor();
+            return cliente;
         }
 
 
@@ -125,10 +234,13 @@ namespace BLL
                 while (true && intentos != 3)
                 {
                     Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.SetCursorPosition(48, 11); Console.Write("Intentos Restantes: " + intentosRestantes);
-                    Console.SetCursorPosition(53, 5); Console.Write("Consultar Contrato");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.SetCursorPosition(53, 5); Console.Write("CONSULTAR CONTRATO");
                     Console.SetCursorPosition(48, 7); Console.Write("Ingrese El Codigo Del Contrato");
                     Console.SetCursorPosition(48, 8); Console.Write("Codigo: ");
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
                     Console.SetCursorPosition(58, 8); codigo = Console.ReadLine();
 
                     if (!string.IsNullOrEmpty(codigo))
@@ -137,6 +249,7 @@ namespace BLL
                         int posicion = buscarContratoEnLista(codigo);
                         if (posicion == -1)
                         {
+                            Console.ForegroundColor = ConsoleColor.Red;
                             Console.SetCursorPosition(48, 12); Console.Write("No Hay Elementos Con Ese Codigo");
                             Console.ReadKey();
                             intentos++;
@@ -305,7 +418,7 @@ namespace BLL
 
                 mostrarInformacionContrato(contrato);
 
-                saldo = aplicarAbonoAlContrato(contrato.saldoContrato, contrato.valorProducto);
+                saldo = aplicarAbonoAlContrato(contrato);
                 if(saldo > 0)
                 {
                     contrato.saldoContrato = saldo;
@@ -328,7 +441,7 @@ namespace BLL
             }
         }
 
-        public decimal aplicarAbonoAlContrato(decimal saldo, decimal valor)
+        public decimal aplicarAbonoAlContrato(Contrato contrato)
         {
             decimal nuevoSaldo = -1;
             string valorDelAbono;
@@ -338,9 +451,9 @@ namespace BLL
                 Console.Clear();
                 Console.SetCursorPosition(53, 5); Console.Write("Detalle De Contrato");
                 Console.SetCursorPosition(48, 7); Console.Write("Valor Contrato: ");
-                Console.SetCursorPosition(68, 7); Console.Write(valor);
+                Console.SetCursorPosition(68, 7); Console.Write(contrato.valorProducto);
                 Console.SetCursorPosition(48, 8); Console.Write("Saldo: ");
-                Console.SetCursorPosition(68, 8); Console.Write(saldo); // Mostrar el saldo actual
+                Console.SetCursorPosition(68, 8); Console.Write(contrato.saldoContrato); // Mostrar el saldo actual
                 Console.SetCursorPosition(48, 11); Console.Write("Ingrese La Cantidad que Desea Abonar");
                 Console.SetCursorPosition(48, 12); Console.Write("Abono: ");
                 Console.SetCursorPosition(58, 12); valorDelAbono = Console.ReadLine();
@@ -351,23 +464,27 @@ namespace BLL
                     if (validarDecimal(valorDelAbono))
                     {
                         decimal abono = decimal.Parse(valorDelAbono);
-
-                        if (abono > 0 && abono <= saldo)
+                        Movimiento movimiento = new Movimiento();
+                        if (abono > 0 && abono <= contrato.saldoContrato)
                         { 
-                            nuevoSaldo = saldo - abono; // Calcular el nuevo saldo restando el abono
+                            nuevoSaldo = contrato.saldoContrato - abono; // Calcular el nuevo saldo restando el abono
                             Console.SetCursorPosition(48, 15); Console.Write("Se Realizaron Los Cambios Con Éxito");
                             Console.ReadKey();
+                            movimiento = movimiento.nuevoMovimiento(contrato, abono);
+                            PersisteciaMovimiento persisteciaMovimiento = new PersisteciaMovimiento();
+                            persisteciaMovimiento.registrarMovimiento(movimiento, "movimiento.txt");
+
                             break;
                         }
                         else
                         {
-                            Console.SetCursorPosition(48, 15); Console.Write("Digite Una Cantidad Válida Mayor Que 0 y Menor o Igual Que " + saldo);
+                            Console.SetCursorPosition(48, 15); Console.Write("Digite Una Cantidad Válida Mayor Que 0 y Menor o Igual Que " + contrato.saldoContrato);
                             Console.ReadKey(); 
                         }
                     }
                     else
                     {
-                        Console.SetCursorPosition(48, 15); Console.Write("Digite Una Cantidad Válida Mayor Que 0 y Menor o Igual Que " + saldo);
+                        Console.SetCursorPosition(48, 15); Console.Write("Digite Una Cantidad Válida Mayor Que 0 y Menor o Igual Que " + contrato.saldoContrato);
                         Console.ReadKey(); 
                     }
 
@@ -435,21 +552,32 @@ namespace BLL
                         {
                             mostrarInformacionContrato(contratos[posicion]);
 
-                            if (confirmarEliminado())
-                            {   
-                                Console.Clear();
-                                contratos.RemoveAt(posicion);
-                                Console.SetCursorPosition(40, 10); Console.Write("Contrato Eliminado Correctamente...");
-                                PersistenciaContato persistenciaContato = new PersistenciaContato();
-                                persistenciaContato.sobreescribirContratoCompraEnArchivo(contratos, "contratos.txt");
-                                Console.ReadKey();
-                                Console.Clear();
-                                break;
+                            if (contratos[posicion].estadoContrato.ToUpper() != "PENDIENTE")
+                            {
+                                if (confirmarEliminado())
+                                {
+                                    Console.Clear();
+                                    contratos.RemoveAt(posicion);
+                                    Console.SetCursorPosition(48, 10); Console.Write("Contrato Eliminado Correctamente...");
+                                    PersistenciaContato persistenciaContato = new PersistenciaContato();
+                                    persistenciaContato.sobreescribirContratoCompraEnArchivo(contratos, "contratos.txt");
+                                    Console.ReadKey();
+                                    Console.Clear();
+                                    break;
+                                }
+                                else
+                                {
+                                    Console.Clear();
+                                    Console.SetCursorPosition(48, 10); Console.Write("Proceso Abortado...");
+                                    Console.ReadKey();
+                                    Console.Clear();
+                                    break;
+                                }
                             }
                             else
                             {
                                 Console.Clear();
-                                Console.SetCursorPosition(40, 10); Console.Write("Proceso Abortado...");
+                                Console.SetCursorPosition(35, 10); Console.Write("Proceso Invalido, Este Contrato Tiene Saldo Pendiente");
                                 Console.ReadKey();
                                 Console.Clear();
                                 break;

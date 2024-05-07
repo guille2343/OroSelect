@@ -43,11 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PersisteciaMovimiento.cs" />
     <Compile Include="PersistenciaCliente.cs" />
     <Compile Include="PersistenciaContato.cs" />
     <Compile Include="PersistenciaEmpleado.cs" />
     <Compile Include="PersistenciaGerente.cs" />
-    <Compile Include="PersistenciaProducto.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

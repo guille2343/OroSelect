@@ -47,6 +47,7 @@
     <Compile Include="Contrato.cs" />
     <Compile Include="Empleado.cs" />
     <Compile Include="Gerente.cs" />
+    <Compile Include="Movimiento.cs" />
     <Compile Include="Persona.cs" />
     <Compile Include="ProductoOro.cs" />
     <Compile Include="Program.cs" />

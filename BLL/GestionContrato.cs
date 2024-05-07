@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
+using System.Security.Cryptography.X509Certificates; 
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,26 +14,26 @@ namespace BLL
     {
         public List<Contrato> contratos = new List<Contrato>();
         public List<Cliente> clientes = new List<Cliente>();
-        
+
         public GestionContrato() { }
-        
+
         public void cargarContratosDelArchivo() { 
             PersistenciaContato persistenciaContato = new PersistenciaContato();
             contratos = persistenciaContato.LeerContratoCompraDesdeArchivo("contratos.txt");
-          
+
         }
-        
+
         public void generarUnContratoCompra()
         {
             Console.Clear();
-        
+
             Cliente cliente = new Cliente();
             Contrato contrato = new Contrato();
             ProductoOro productoOro = new ProductoOro();
             PersistenciaCliente persistenciaCliente = new PersistenciaCliente();
             clientes = persistenciaCliente.LeerClientesDesdeArchivo("clientes.txt");
             string idComprador;
-        
+
             while (true)
             {
                 Console.Clear();
@@ -52,7 +52,7 @@ namespace BLL
                         Console.ReadKey();
                         Console.Clear();
                         break;
-                        
+
                     }
                     else
                     {
@@ -72,13 +72,13 @@ namespace BLL
             PersistenciaContato persistenciaContato = new PersistenciaContato();
             persistenciaContato.GuardarContratoCompraEnArchivo(contrato, "contratos.txt");
             Console.Clear();
-            
-            
+
+
             Console.ReadKey();
             Console.Clear();
         }
-        
-        
+
+
         public int clienteExiste(String codigo)
         {
             int encontro = -1;
@@ -91,7 +91,7 @@ namespace BLL
             }
             return encontro;
         }
-        
+
         public int buscarContratoEnLista(String codigo)
         {
             for (int i = 0; i < contratos.Count; i++)
@@ -103,22 +103,22 @@ namespace BLL
             }
             return -1;
         }
-        
+
         public bool listaVacia()
         {
             cargarContratosDelArchivo();
-        
+
             if(contratos.Count == 0)
             {
                 return true;
             }
             return false;
         }
-        
+
         public void consultarContratoEnLista()
         {
             if (!listaVacia()) {
-        
+
                 Contrato contrato = new Contrato();
                 string codigo;
                 int intentos = 0, intentosRestantes = 3;
@@ -130,10 +130,10 @@ namespace BLL
                     Console.SetCursorPosition(48, 7); Console.Write("Ingrese El Codigo Del Contrato");
                     Console.SetCursorPosition(48, 8); Console.Write("Codigo: ");
                     Console.SetCursorPosition(58, 8); codigo = Console.ReadLine();
-        
+
                     if (!string.IsNullOrEmpty(codigo))
                     {
-        
+
                         int posicion = buscarContratoEnLista(codigo);
                         if (posicion == -1)
                         {
@@ -165,7 +165,7 @@ namespace BLL
             }
             Console.Clear();
         }
-        
+
         public void mostrarInformacionContrato(Contrato contrato)
         {   
           Console.Clear();
@@ -201,13 +201,13 @@ namespace BLL
             Console.ReadKey();
             Console.Clear();
         }
-        
+
         public void generarListaContratos()
         {
             if (!listaVacia())
             {
                 int posicionEnPnatalla = 8;
-        
+
                 Console.Clear();
                 Console.SetCursorPosition(53, 5); Console.Write("LISTA DE CONTRATOS");
                 Console.SetCursorPosition(10, 7); Console.Write("CODIGO");
@@ -217,7 +217,7 @@ namespace BLL
                 Console.SetCursorPosition(70, 7); Console.Write("NOMBRE");
                 Console.SetCursorPosition(85, 7); Console.Write("VALOR");
                 Console.SetCursorPosition(100, 7); Console.Write("SALDO");
-        
+
                 for(int i = 0; i < contratos.Count; i++)
                 {
                     Console.SetCursorPosition(10, posicionEnPnatalla); Console.Write(contratos[i].codigoContrato);
@@ -227,13 +227,13 @@ namespace BLL
                     Console.SetCursorPosition(70, posicionEnPnatalla); Console.Write(contratos[i].nombreComprador);
                     Console.SetCursorPosition(85, posicionEnPnatalla); Console.Write(contratos[i].valorProducto);
                     Console.SetCursorPosition(100, posicionEnPnatalla); Console.Write(contratos[i].saldoContrato);
-        
+
                     posicionEnPnatalla++;
                 }
-        
+
                 Console.ReadKey();
                 Console.Clear();
-        
+
             }
             else
             {
@@ -241,10 +241,10 @@ namespace BLL
                 Console.SetCursorPosition(48, 10); Console.Write("No Hay Elementos En La Lista");
                 Console.ReadKey();
             }
-        
+
             Console.Clear();
         }
-        
+
         public void realizarAbonoAlContrato()
         {
             if (!listaVacia())
@@ -260,7 +260,7 @@ namespace BLL
                     Console.SetCursorPosition(48, 7); Console.Write("Ingrese El Codigo Del Contrato");
                     Console.SetCursorPosition(48, 8); Console.Write("Codigo: ");
                     Console.SetCursorPosition(58, 8); codigo = Console.ReadLine();
-        
+
                     if (!string.IsNullOrEmpty(codigo))
                     {
                         int posicion = buscarContratoEnLista(codigo);
@@ -293,18 +293,18 @@ namespace BLL
                 Console.ReadKey();
             }
         }
-        
+
         public void revisarContrato(Contrato contrato)
         {   
             PersistenciaContato persistenciaContato = new PersistenciaContato();
             Console.Clear();
             decimal saldo = -1;
-        
+
             if (string.Equals(contrato.estadoContrato, "PENDIENTE", StringComparison.OrdinalIgnoreCase))
             {
-             
+
                 mostrarInformacionContrato(contrato);
-        
+
                 saldo = aplicarAbonoAlContrato(contrato.saldoContrato, contrato.valorProducto);
                 if(saldo > 0)
                 {
@@ -319,7 +319,7 @@ namespace BLL
                     persistenciaContato.sobreescribirContratoCompraEnArchivo(contratos, "contratos.txt"); 
                     Console.Clear() ;
                 }
-        
+
             }else
             {
                 Console.SetCursorPosition(48, 10); Console.Write("Este Contrato No Tiene Saldo Pendiente");
@@ -327,12 +327,12 @@ namespace BLL
                 Console.Clear();
             }
         }
-        
+
         public decimal aplicarAbonoAlContrato(decimal saldo, decimal valor)
         {
             decimal nuevoSaldo = -1;
             string valorDelAbono;
-        
+
             while (true)
             {
                 Console.Clear();
@@ -344,14 +344,14 @@ namespace BLL
                 Console.SetCursorPosition(48, 11); Console.Write("Ingrese La Cantidad que Desea Abonar");
                 Console.SetCursorPosition(48, 12); Console.Write("Abono: ");
                 Console.SetCursorPosition(58, 12); valorDelAbono = Console.ReadLine();
-        
+
                 if (!string.IsNullOrEmpty(valorDelAbono))
                 {
                     validarDecimal(valorDelAbono);
                     if (validarDecimal(valorDelAbono))
                     {
                         decimal abono = decimal.Parse(valorDelAbono);
-        
+
                         if (abono > 0 && abono <= saldo)
                         { 
                             nuevoSaldo = saldo - abono; // Calcular el nuevo saldo restando el abono
@@ -370,7 +370,7 @@ namespace BLL
                         Console.SetCursorPosition(48, 15); Console.Write("Digite Una Cantidad Válida Mayor Que 0 y Menor o Igual Que " + saldo);
                         Console.ReadKey(); 
                     }
-        
+
                 }
                 else
                 {
@@ -380,7 +380,7 @@ namespace BLL
             }
             return nuevoSaldo;
         }
-        
+
         public bool validarDecimal(string dato)
         {
             decimal enteroProducto;
@@ -391,7 +391,7 @@ namespace BLL
                 {
                     return false;
                 }
-        
+
             }
             catch (FormatException)
             {
@@ -403,12 +403,12 @@ namespace BLL
             }
             return true;
         }
-        
+
         public void eliminarUnContrato() {
-        
+
             if (!listaVacia())
             {
-        
+
                 Contrato contrato = new Contrato();
                 string codigo;
                 int intentos = 0, intentosRestantes = 3;
@@ -420,7 +420,7 @@ namespace BLL
                     Console.SetCursorPosition(48, 7); Console.Write("Ingrese El Codigo Del Contrato");
                     Console.SetCursorPosition(48, 8); Console.Write("Codigo: ");
                     Console.SetCursorPosition(58, 8); codigo = Console.ReadLine();
-        
+
                     if (!string.IsNullOrEmpty(codigo))
                     {
                         int posicion= buscarContratoEnLista(codigo);
@@ -434,7 +434,7 @@ namespace BLL
                         else
                         {
                             mostrarInformacionContrato(contratos[posicion]);
-        
+
                             if (confirmarEliminado())
                             {   
                                 Console.Clear();
@@ -454,7 +454,7 @@ namespace BLL
                                 Console.Clear();
                                 break;
                             }
-                            
+
                         }
                     }
                     else
@@ -474,7 +474,7 @@ namespace BLL
             }
             Console.Clear();
         }
-        
+
         public bool confirmarEliminado()
         {
             int seleccion;
@@ -487,10 +487,10 @@ namespace BLL
                 Console.SetCursorPosition(48, 12); Console.Write("Esta Seguro De Esto?");
                 Console.SetCursorPosition(48, 13); Console.Write("1. Confirmar.");
                 Console.SetCursorPosition(48, 14); Console.Write("2. Cancelar.");
-        
+
                 Console.SetCursorPosition(48, 16); Console.Write("Seleccione Una Opcion");
                 Console.SetCursorPosition(48, 17); opccion = Console.ReadLine();
-        
+
                 if (!string.IsNullOrEmpty(opccion))
                 {
                     if (validarEntero(opccion))
@@ -517,11 +517,11 @@ namespace BLL
             else if (seleccion == 2)
             {
                 respuesta = false;
-        
+
             }
             return respuesta;
         }
-        
+
         public bool validarEntero(string dato)
         {
             int enteroProducto;
@@ -532,7 +532,7 @@ namespace BLL
                 {
                     return false;
                 }
-        
+
             }
             catch (FormatException)
             {
